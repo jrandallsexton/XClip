@@ -41,3 +41,6 @@ $RECYCLE.BIN/
 Network Trash Folder
 Temporary Items
 .apdisk
+XClip.Tests/obj/
+XClip.Utils/obj/
+XClip/obj/
