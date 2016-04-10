@@ -18,7 +18,7 @@ namespace XClip.Api.Controllers
             if (tmp == null)
                 return NotFound();
 
-            return Ok(new mediaSource(tmp.Id, tmp.UId, tmp.FName, tmp.FExt));
+            return Ok(new mediaSource(tmp.Id, tmp.UId, tmp.Filename, tmp.FileExt));
         }
 
         [HttpPut]

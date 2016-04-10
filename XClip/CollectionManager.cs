@@ -43,7 +43,7 @@ namespace XClip
             var uId = _sourceManager.UId(collectionId, id);
 
             // auto-generate some tags based on the filename (if any words are found within the title)
-            this.AutoTag(id, source.FName);
+            this.AutoTag(id, source.Filename);
 
             if (!moveFiles)
                 return;
@@ -59,8 +59,8 @@ namespace XClip
             if (!Directory.Exists(target))
                 Directory.CreateDirectory(target);
 
-            var srcPath = Path.Combine(config.DirectoryIn, $"{source.FName}{source.FExt}");
-            var tgtPath = Path.Combine(target, $"{uId}{source.FExt}");
+            var srcPath = Path.Combine(config.DirectoryIn, $"{source.Filename}{source.FileExt}");
+            var tgtPath = Path.Combine(target, $"{uId}{source.FileExt}");
 
             File.Move(srcPath, tgtPath);
         }

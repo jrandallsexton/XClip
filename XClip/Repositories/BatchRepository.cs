@@ -23,21 +23,21 @@ namespace XClip.Repositories
 
         }
 
-        public bool Save(string fName, string fExt, long fileSize, DateTime created)
-        {
-            const string sql = "INSERT INTO [BatchSources] ([Filename], [FileExt], [Filesize], [Filedate]) VALUES (@Fname, @FExt, @FSize, @FDate)";
+        //public bool Save(string fName, string fExt, long fileSize, DateTime created)
+        //{
+        //    const string sql = "INSERT INTO [BatchSources] ([Filename], [FileExt], [Filesize], [Filedate]) VALUES (@Fname, @FExt, @FSize, @FDate)";
 
-            var paramList = new List<SqlParameter>
-            {
-                new SqlParameter("@Fname", fName),
-                new SqlParameter("@FExt", fExt),
-                new SqlParameter("@FSize", fileSize),
-                new SqlParameter("@FDate", created)
-            };
+        //    var paramList = new List<SqlParameter>
+        //    {
+        //        new SqlParameter("@Fname", fName),
+        //        new SqlParameter("@FExt", fExt),
+        //        new SqlParameter("@FSize", fileSize),
+        //        new SqlParameter("@FDate", created)
+        //    };
 
-            return base.ExecuteInLineSql(sql, paramList);
+        //    return base.ExecuteInLineSql(sql, paramList);
 
-        }
+        //}
 
         public XSource RandomSource(int collectionId)
         {

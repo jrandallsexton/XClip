@@ -17,10 +17,10 @@ namespace XClip
             return _repo.FileExists(fName);
         }
 
-        public bool Save(string fName, string fExt, long fileSize, DateTime created)
-        {
-            return _repo.Save(fName, fExt, fileSize, created);
-        }
+        //public bool Save(string fName, string fExt, long fileSize, DateTime created)
+        //{
+        //    return _repo.Save(fName, fExt, fileSize, created);
+        //}
 
         public XSource RandomSource(int collectionId)
         {
@@ -30,6 +30,11 @@ namespace XClip
         public KeyValuePair<Guid, string> Source(Guid id)
         {
             return _repo.Source(id);
+        }
+
+        public bool Save(XBatch batch)
+        {
+            return _repo.BatchInfoSave(batch);
         }
     }
 }

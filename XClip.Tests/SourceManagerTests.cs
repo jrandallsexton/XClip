@@ -1,4 +1,5 @@
 ﻿
+using System;
 using System.IO;
 using System.Linq;
 
@@ -45,12 +46,22 @@ namespace XClip.Tests
                                    where allowedExtensions.Contains(fi.Extension)
                                    select new XSource(fi.Name, fi.Extension, fi.Length, fi.CreationTime))
             {
-                source.FName = source.FName.Replace(source.FExt, string.Empty);
+                source.Filename = source.Filename.Replace(source.FileExt, string.Empty);
                 mgr.AddToCollection(collectionId, source, true);
                 idx++;
                 if (idx == 10)
                     break;
             }
+        }
+
+        [Test]
+        public void GetMediaSource()
+        {
+            Guid uId = new Guid("03DE6AEF-CBCE-42DD-8D72-FC412F129469");
+
+            var mediaSource = new SourceManager().Get(uId);
+
+            Assert.NotNull(mediaSource);
         }
     }
 }

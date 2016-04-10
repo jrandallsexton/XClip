@@ -1,9 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Configuration;
+using System.Data;
 using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Dapper;
 using TMCP.Core.Data;
 using XClip.DataObjects;
 
@@ -11,6 +14,8 @@ namespace XClip.Repositories
 {
     public class SourceRepository : RepositoryBase
     {
+        private IDbConnection _db = new SqlConnection(ConfigurationManager.ConnectionStrings["xclipDb"].ConnectionString);
+
         public int Save(int collectionId, XSource source)
         {
             const string select =
@@ -18,10 +23,10 @@ namespace XClip.Repositories
             var paramList = new List<SqlParameter>
             {
                 new SqlParameter("CollectionId", collectionId),
-                new SqlParameter("Filename", source.FName),
-                new SqlParameter("FileExt", source.FExt),
-                new SqlParameter("FileSize", source.FSize),
-                new SqlParameter("FileDate", source.FDate)
+                new SqlParameter("Filename", source.Filename),
+                new SqlParameter("FileExt", source.FileExt),
+                new SqlParameter("FileSize", source.FileSize),
+                new SqlParameter("FileDate", source.FileDate)
             };
 
             var id = new SqlBaseDal().ExecuteScalarInLine(select, paramList);
@@ -32,10 +37,10 @@ namespace XClip.Repositories
             var paramList2 = new List<SqlParameter>
             {
                 new SqlParameter("CollectionId", collectionId),
-                new SqlParameter("Filename", source.FName),
-                new SqlParameter("FileExt", source.FExt),
-                new SqlParameter("FileSize", source.FSize),
-                new SqlParameter("FileDate", source.FDate)
+                new SqlParameter("Filename", source.Filename),
+                new SqlParameter("FileExt", source.FileExt),
+                new SqlParameter("FileSize", source.FileSize),
+                new SqlParameter("FileDate", source.FileDate)
             };
             const string sql = "INSERT INTO [BatchSources] ([CollectionId], [Filename], [FileExt], [Filesize], [Filedate]) VALUES (@CollectionId, @Filename, @FileExt, @FileSize, @FileDate) SELECT SCOPE_IDENTITY()";
 
@@ -62,6 +67,14 @@ namespace XClip.Repositories
                 new SqlParameter("UId", sourceId)
             };
             base.ExecuteInLineSql(sql, paramList);
+        }
+
+        public XSource Get(Guid uId)
+        {
+            var sql =
+                $"SELECT [Id], [UId], [CollectionId], [Filename], [FileExt], [FileSize], [FileDate], [Created], [Reviewed], [Deleted], [Skipped], [SaveSource] FROM [BatchSources] WHERE [UId] = '{uId.ToString()}'";
+
+            return _db.Query<XSource>(sql).FirstOrDefault();
         }
     }
 }

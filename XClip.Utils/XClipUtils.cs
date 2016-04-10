@@ -110,7 +110,7 @@ namespace XClip.Utils
             //Console.WriteLine("{0} tagcount", tagValues.Count);
             for (var i = 0; i < 2005; i++)
             {
-                var fileName = new BatchManager().RandomSource(1).FName;
+                var fileName = new BatchManager().RandomSource(1).Filename;
 
                 var matches = Regex.Matches(fileName, @"\w(?<!\d)[\w'-]*");
 

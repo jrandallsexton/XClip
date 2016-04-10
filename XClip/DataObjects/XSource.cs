@@ -9,30 +9,35 @@ namespace XClip.DataObjects
 
         public Guid UId { get; set; }
 
-        public string FName { get; set; }
+        public string Filename { get; set; }
 
-        public string FExt { get; set; }
+        public string FileExt { get; set; }
 
-        public long FSize { get; set; }
+        public long FileSize { get; set; }
 
-        public DateTime FDate { get; set; }
+        public DateTime FileDate { get; set; }
+
+        public XSource()
+        {
+            
+        }
 
         public XSource(string fName, string fExt, long fSize, DateTime fDate)
         {
-            this.FName = fName;
-            this.FExt = fExt;
-            this.FSize = fSize;
-            this.FDate = fDate;
+            this.Filename = fName;
+            this.FileExt = fExt;
+            this.FileSize = fSize;
+            this.FileDate = fDate;
         }
 
         public XSource(int id, Guid uId, string fName, string fExt, long fSize, DateTime fDate)
         {
             this.Id = id;
             this.UId = uId;
-            this.FName = fName;
-            this.FExt = fExt;
-            this.FSize = fSize;
-            this.FDate = fDate;
+            this.Filename = fName;
+            this.FileExt = fExt;
+            this.FileSize = fSize;
+            this.FileDate = fDate;
         }
     }
 }
