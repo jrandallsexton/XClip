@@ -382,7 +382,7 @@ namespace XClip.Tests
                 new SqlParameter("@M", SqlDbType.NVarChar) {Value = result.Method}
             };
 
-            using (var connection = new SqlConnection(@"Data Source=(LocalDB)\v11.0;AttachDbFilename=C:\Projects\WorkCenters\WCTestRunner\WCTestRunner\Database1.mdf;Integrated Security=True"))
+            using (var connection = new SqlConnection(@"Data Source=(LocalDB)\v11.0;AttachDbFilename=C:\Projects\Database1.mdf;Integrated Security=True"))
             {
 
                 using (var cmdSql = new SqlCommand(sql.ToString(), connection))
