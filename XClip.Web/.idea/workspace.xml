@@ -2,29 +2,10 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="0a4fb62d-2588-4fdd-81db-e59aa3674947" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/js/apiWrapper.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/js/models/batch.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/js/models/batchItem.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/js/models/mediaSource.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../XClip.Api/Web.config" afterPath="$PROJECT_DIR$/../XClip.Api/Web.config" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../XClip.Api/XClip.Api.csproj" afterPath="$PROJECT_DIR$/../XClip.Api/XClip.Api.csproj" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../XClip.Tests/CollectionManagerTests.cs" afterPath="$PROJECT_DIR$/../XClip.Tests/CollectionManagerTests.cs" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../XClip.Tests/XClip.Tests.csproj" afterPath="$PROJECT_DIR$/../XClip.Tests/XClip.Tests.csproj" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../XClip.Tests/packages.config" afterPath="$PROJECT_DIR$/../XClip.Tests/packages.config" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../XClip.Utils/App.config" afterPath="$PROJECT_DIR$/../XClip.Utils/App.config" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../XClip.Utils/XClip.Utils.csproj" afterPath="$PROJECT_DIR$/../XClip.Utils/XClip.Utils.csproj" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../XClip.Utils/XClipUtils.cs" afterPath="$PROJECT_DIR$/../XClip.Utils/XClipUtils.cs" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../XClip.Utils/packages.config" afterPath="$PROJECT_DIR$/../XClip.Utils/packages.config" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../XClip/BatchManager.cs" afterPath="$PROJECT_DIR$/../XClip/BatchManager.cs" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../XClip/CollectionManager.cs" afterPath="$PROJECT_DIR$/../XClip/CollectionManager.cs" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../XClip/Config/XClipConfig.cs" afterPath="$PROJECT_DIR$/../XClip/Config/XClipConfig.cs" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../XClip/DataObjects/XSource.cs" afterPath="$PROJECT_DIR$/../XClip/DataObjects/XSource.cs" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../XClip/Repositories/BatchRepository.cs" afterPath="$PROJECT_DIR$/../XClip/Repositories/BatchRepository.cs" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../XClip/Repositories/CollectionRepository.cs" afterPath="$PROJECT_DIR$/../XClip/Repositories/CollectionRepository.cs" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../XClip/Repositories/RepositoryBase.cs" afterPath="$PROJECT_DIR$/../XClip/Repositories/RepositoryBase.cs" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../XClip/Repositories/TagRepository.cs" afterPath="$PROJECT_DIR$/../XClip/Repositories/TagRepository.cs" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../XClip/TagManager.cs" afterPath="$PROJECT_DIR$/../XClip/TagManager.cs" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../XClip/XClip.csproj" afterPath="$PROJECT_DIR$/../XClip/XClip.csproj" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../XClip.Api/Controllers/MediaSourceController.cs" afterPath="$PROJECT_DIR$/../XClip.Api/Controllers/MediaSourceController.cs" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../XClip.Tests/Api/MediaSourceControllerTests.cs" afterPath="$PROJECT_DIR$/../XClip.Tests/Api/MediaSourceControllerTests.cs" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../XClip.Tests/ApiControllerTestBase.cs" afterPath="$PROJECT_DIR$/../XClip.Tests/ApiControllerTestBase.cs" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../XClip.Tests/SourceManagerTests.cs" afterPath="$PROJECT_DIR$/../XClip.Tests/SourceManagerTests.cs" />
     </list>
     <ignored path="XClip.Web.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -460,12 +441,12 @@
       <workItem from="1459333558562" duration="15434000" />
       <workItem from="1459876203560" duration="34000" />
       <workItem from="1459974937077" duration="2003000" />
-      <workItem from="1460200983471" duration="13366000" />
+      <workItem from="1460200983471" duration="13964000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="30837000" />
+    <option name="totallyTimeSpent" value="31435000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />

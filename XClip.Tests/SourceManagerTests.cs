@@ -57,11 +57,16 @@ namespace XClip.Tests
         [Test]
         public void GetMediaSource()
         {
-            Guid uId = new Guid("03DE6AEF-CBCE-42DD-8D72-FC412F129469");
+            Guid uId = this.GetValidMediaSourceId();
 
             var mediaSource = new SourceManager().Get(uId);
 
             Assert.NotNull(mediaSource);
+        }
+
+        private Guid GetValidMediaSourceId()
+        {
+            return new Guid("03DE6AEF-CBCE-42DD-8D72-FC412F129469");
         }
     }
 }

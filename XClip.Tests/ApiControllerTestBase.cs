@@ -286,7 +286,6 @@ namespace XClip.Tests
                 client.Credentials = _credentials;
 
                 client.Headers["Content-Type"] = "application/json";
-                client.Headers["Cookie"] = "ASP.NET_SessionId=0lngv3dowkreun42p4jzrfad; role=F_AllFranchiseOwners; franchise-roles=[\"F_AllFranchiseOwners\"]; versionAcknowledged=True";
 
                 var postArray = Encoding.ASCII.GetBytes(jsonData);
 

@@ -21,5 +21,16 @@ namespace XClip.Tests.Api
 
             Assert.NotNull(random);
         }
+
+        [Test]
+        public void SkipSucceeds()
+        {
+            var mediaId = new Guid("9573BEDA-1E0F-4AF7-BA7A-F41232CF6574");
+
+            var url = rootPath + "media/" + mediaId + "/";
+            var random = base.PerformPut(url, mediaId.ToString(), false);
+
+            Assert.NotNull(random);
+        }
     }
 }

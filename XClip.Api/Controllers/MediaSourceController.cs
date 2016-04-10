@@ -23,11 +23,11 @@ namespace XClip.Api.Controllers
 
         [HttpPut]
         [Route("{mediaId:alpha}")]
-        public IHttpActionResult Skip(string mediaId)
+        public IHttpActionResult Skip(string mediaId, [FromBody] string id)
         {
             Guid uId;
 
-            if (!Guid.TryParse(mediaId, out uId))
+            if (!Guid.TryParse(id, out uId))
                 return NotFound();
 
             new SourceManager().MarkAsSkipped(uId);
