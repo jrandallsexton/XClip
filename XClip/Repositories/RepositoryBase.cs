@@ -16,7 +16,7 @@ namespace XClip.Repositories
 
         public RepositoryBase()
         {
-            _connectionString = ConfigurationManager.ConnectionStrings["ResumeDb"].ConnectionString;
+            _connectionString = ConfigurationManager.ConnectionStrings["xclipDb"].ConnectionString;
         }
 
         /// <summary>

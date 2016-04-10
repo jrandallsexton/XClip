@@ -2,27 +2,35 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
-
+using System.Linq;
+using System.Text.RegularExpressions;
 using XClip.Config;
 
 namespace XClip.Utils
 {
     public class XClipUtils
     {
-        private readonly List<string> _allowedExtensions = new List<string>() { ".mp4", ".wmv", ".flv", ".mpg", ".avi" };
 
         public void GetFileStats()
         {
 
             var config = XClipConfig.GetSection();
+            var allowedExtensions = config.AllowedExtensions.Split(',').ToList();
             var di = new DirectoryInfo(config.DirectoryIn);
             var counts = new SortedDictionary<string, int>();
 
             foreach (var fi in di.GetFiles("*.*", SearchOption.AllDirectories))
             {
+
+                if (!allowedExtensions.Contains(fi.Extension))
+                    continue;
+
                 var tmp = fi.Extension.ToLower().Trim();
+
                 if (!counts.ContainsKey(tmp)) { counts.Add(tmp, 0); }
+
                 counts[tmp] += 1;
+
             }
 
             foreach (var kvp in counts)
@@ -41,8 +49,10 @@ namespace XClip.Utils
             {
                 if (fi.Extension == string.Empty)
                     continue;
-                if (!_allowedExtensions.Contains(fi.Extension))
+
+                if (!config.AllowedExtensions.Contains(fi.Extension))
                     continue;
+
                 if (fi.Name.Contains("(") && fi.Name.Contains(")"))
                 {
                     //Console.WriteLine(fi.Name);
@@ -74,5 +84,69 @@ namespace XClip.Utils
                 }
             }
         }
+
+        public void LoadTagsFromExternalSource()
+        {
+            var lines = File.ReadAllLines(@"f:\tags.txt");
+
+            var tm = new TagManager();
+
+            foreach (var line in lines.Where(line => !string.IsNullOrEmpty(line)))
+            {
+                tm.Save(line.Trim());
+            }
+        }
+
+        public void GenerateTags()
+        {
+            var tagMgr = new TagManager();
+
+            var tags = tagMgr.GetTags();
+            var tagValues = tags.Values.ToList();
+            var added = new List<string>();
+
+            var blackList = tagMgr.GetBlacklist();
+
+            //Console.WriteLine("{0} tagcount", tagValues.Count);
+            for (var i = 0; i < 2005; i++)
+            {
+                var fileName = new BatchManager().RandomSource(1).FName;
+
+                var matches = Regex.Matches(fileName, @"\w(?<!\d)[\w'-]*");
+
+                //Console.WriteLine(fileName);
+
+                foreach (var m in matches)
+                {
+                    var word = m.ToString();
+
+                    if (word.Length == 1 || word.Length > 10)
+                        continue;
+
+                    if (blackList.Contains(word.ToLower()))
+                    {
+                        //Console.WriteLine("\tIgnored: {0}", m);
+                        continue;
+                    }
+
+                    // does this word already exist as a tag?
+                    if (tagValues.Contains(word.ToLower()))
+                    {
+                        //Console.WriteLine("\tMatched: {0}", word);
+                        continue;
+                    }
+
+                    tagValues.Add(m.ToString().ToLower());
+                    added.Add(m.ToString().ToLower());
+                    Console.WriteLine("\tSuggested: {0}", m.ToString().ToLower());
+                }
+            }
+
+            added.Sort();
+
+            added.ForEach(x => Console.WriteLine(x));
+            //Console.WriteLine("{0} tagcount", tagValues.Count);
+        }
+
     }
 }

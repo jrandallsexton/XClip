@@ -1,0 +1,150 @@
+Index: applications/mp4box/main.c
+===================================================================
+RCS file: /cvsroot/gpac/gpac/applications/mp4box/main.c,v
+retrieving revision 1.93
+diff -u -r1.93 main.c
+--- applications/mp4box/main.c	31 Oct 2008 13:42:56 -0000	1.93
++++ applications/mp4box/main.c	11 Dec 2008 09:59:32 -0000
+@@ -84,7 +84,7 @@
+ 	{GF_ISOM_ITUNE_COMMENT, "comment", "usage: comment=any comment"},
+ 	{GF_ISOM_ITUNE_COMPILATION, "compilation", "usage: compilation=yes,no"},
+ 	{GF_ISOM_ITUNE_COMPOSER, "composer", "usage: composer=name"},
+-	{GF_ISOM_ITUNE_CREATED, "created", ""},
++	{GF_ISOM_ITUNE_CREATED, "created", "usage: created=year"},
+ 	{GF_ISOM_ITUNE_DISK, "disk", "usage: disk=x/N"},
+ 	{GF_ISOM_ITUNE_TOOL, "tool", "usage: tool=name"},
+ 	{GF_ISOM_ITUNE_GENRE, "genre", "usage: genre=name"},
+@@ -92,7 +92,7 @@
+ 	{GF_ISOM_ITUNE_TEMPO, "tempo", "usage: tempo=integer"},
+ 	{GF_ISOM_ITUNE_WRITER, "writer", "usage: writer=name"},
+ 	{GF_ISOM_ITUNE_GROUP, "group", "usage: group=name"},
+-	{GF_ISOM_ITUNE_COVER_ART, "cover", "usage: covber=file.jpg,file.png"},
++	{GF_ISOM_ITUNE_COVER_ART, "cover", "usage: cover=file.jpg,file.png"},
+ 	{GF_ISOM_ITUNE_ENCODER, "encoder", "usage: encoder=name"},
+ 	{GF_ISOM_ITUNE_GAPELESS, "gapeless", "usage: artist=yes,no"},
+ };
+@@ -138,6 +138,7 @@
+ 			"                       * Note 1: some tracks may be removed in the process\n"
+ 			"                       * Note 2: always on for *.3gp *.3g2 *.3gpp\n"
+ 			" -ipod                rewrites the file for iPod\n"
++			" -psp                 rewrites the file for PSP devices\n"
+ 			" -brand ABCD[:v]      sets major brand of file, with optional version\n"
+ 			" -ab ABCD             adds given brand to file's alternate brand list\n"
+ 			" -rb ABCD             removes given brand from file's alternate brand list\n"
+@@ -881,7 +882,7 @@
+ } MetaAction;
+ 
+ /*for SDP_EX, AddTrack and RemTrack*/
+-#define MAX_CUMUL_OPS	20
++#define MAX_CUMUL_OPS	100
+ 
+ #ifndef GPAC_READ_ONLY
+ static Bool parse_meta_args(MetaAction *meta, char *opts)
+@@ -1278,6 +1279,7 @@
+ 		else if (!stricmp(arg, "-isma")) { conv_type = GF_ISOM_CONV_TYPE_ISMA; open_edit = 1; }
+ 		else if (!stricmp(arg, "-3gp")) { conv_type = GF_ISOM_CONV_TYPE_3GPP; open_edit = 1; }
+ 		else if (!stricmp(arg, "-ipod")) { conv_type = GF_ISOM_CONV_TYPE_IPOD; open_edit = 1; }
++		else if (!stricmp(arg, "-psp")) { conv_type = GF_ISOM_CONV_TYPE_PSP; open_edit = 1; }
+ 		else if (!stricmp(arg, "-ismax")) { conv_type = GF_ISOM_CONV_TYPE_ISMA_EX; open_edit = 1; }
+ 
+ 		else if (!stricmp(arg, "-no-sys") || !stricmp(arg, "-nosys")) { remove_sys_tracks = 1; open_edit = 1; }
+Index: build/msvc6/mp4box.dsp
+===================================================================
+RCS file: /cvsroot/gpac/gpac/build/msvc6/mp4box.dsp,v
+retrieving revision 1.7
+diff -u -r1.7 mp4box.dsp
+--- build/msvc6/mp4box.dsp	18 Apr 2008 12:27:20 -0000	1.7
++++ build/msvc6/mp4box.dsp	11 Dec 2008 09:53:11 -0000
+@@ -42,7 +42,7 @@
+ # PROP Ignore_Export_Lib 0
+ # PROP Target_Dir ""
+ # ADD BASE CPP /nologo /W3 /GX /O2 /D "WIN32" /D "NDEBUG" /D "_CONSOLE" /D "_MBCS" /YX /FD /c
+-# ADD CPP /nologo /MD /W3 /GX /O1 /I "../../include" /D "WIN32" /D "NDEBUG" /D "_CONSOLE" /D "_MBCS" /FD /c
++# ADD CPP /nologo /MD /W3 /GX /O1 /I "../../include" /D "WIN32" /D "NDEBUG" /D "_CONSOLE" /D "_MBCS" /FR /FD /c
+ # SUBTRACT CPP /YX
+ # ADD BASE RSC /l 0x40c /d "NDEBUG"
+ # ADD RSC /l 0x40c /d "NDEBUG"
+@@ -100,5 +100,13 @@
+ 
+ SOURCE=..\..\applications\mp4box\main.c
+ # End Source File
++# Begin Source File
++
++SOURCE=..\..\applications\mp4box\mp4box.rc
++# End Source File
++# Begin Source File
++
++SOURCE=..\..\applications\mp4box\resource.h
++# End Source File
+ # End Target
+ # End Project
+Index: include/gpac/tools.h
+===================================================================
+RCS file: /cvsroot/gpac/gpac/include/gpac/tools.h,v
+retrieving revision 1.56
+diff -u -r1.56 tools.h
+--- include/gpac/tools.h	5 Dec 2008 18:32:22 -0000	1.56
++++ include/gpac/tools.h	11 Dec 2008 10:03:14 -0000
+@@ -58,10 +58,11 @@
+  *	Macro giving GPAC version expressed as a printable string
+ */
+ /*KEEP SPACE SEPARATORS FOR MAKE / GREP (SEE MAIN MAKEFILE)!!!, and NO SPACE in GPAC_VERSION for proper install*/
+-#define GPAC_VERSION       "0.4.6-DEV"
++#define GPAC_VERSION       "0.4.5" //0.4.6dev
++#define COMPILER_NAME      "Kurtnoise"
+ 
+-#define GPAC_BUILD_NUMBER	"1"
+-#define GPAC_FULL_VERSION       GPAC_VERSION" (build "GPAC_BUILD_NUMBER")"
++#define GPAC_BUILD_NUMBER	"33"  //1
++#define GPAC_FULL_VERSION       GPAC_VERSION" (build "GPAC_BUILD_NUMBER" - "__DATE__") - compiled by "COMPILER_NAME""
+ 
+ /*!
+  *	\brief GPAC Version
+@@ -69,7 +70,7 @@
+  *
+  *	Macro giving GPAC version expressed as an integer, where version X.Y.Z is coded as 0x00XXYYZZ
+ */
+-#define GPAC_VERSION_INT	0x00000406
++#define GPAC_VERSION_INT	0x00000405 //406
+ 
+ /*!
+  *	\brief Memory allocation
+Index: src/media_tools/media_export.c
+===================================================================
+RCS file: /cvsroot/gpac/gpac/src/media_tools/media_export.c,v
+retrieving revision 1.30
+diff -u -r1.30 media_export.c
+--- src/media_tools/media_export.c	24 Nov 2008 14:58:25 -0000	1.30
++++ src/media_tools/media_export.c	11 Dec 2008 10:08:56 -0000
+@@ -1074,6 +1074,8 @@
+ 	case IBM_FORMAT_ALAW: comp = "ibm_alaw"; break;
+ 	case IBM_FORMAT_ADPCM: comp = "ibm_adpcm"; break;
+ 	case 0x55: comp = "mp3"; break;
++    case 0x2000: comp = "ac3"; break;
++    case 0x2001: comp = "dts"; break;
+ 	default: comp = "raw"; break;
+ 	}
+ 	sprintf(szOutFile, "%s.%s", dumper->out_name, comp);
+Index: src/media_tools/media_import.c
+===================================================================
+RCS file: /cvsroot/gpac/gpac/src/media_tools/media_import.c,v
+retrieving revision 1.114
+diff -u -r1.114 media_import.c
+--- src/media_tools/media_import.c	24 Oct 2008 17:55:09 -0000	1.114
++++ src/media_tools/media_import.c	11 Dec 2008 10:05:51 -0000
+@@ -5975,12 +5975,13 @@
+ 		}
+ 		if (e) goto exit;
+ 
+-		gf_set_progress("Importing AAC", done, tot_size);
++		gf_set_progress("Importing AC3", done, tot_size);
+ 
+ 		samp->DTS += 1536;
+ 		done += samp->dataLength;
+ 		if (duration && (samp->DTS > duration)) break;
+ 		if (import->flags & GF_IMPORT_DO_ABORT) break;
++		if (done > tot_size) break;
+ 	}
+ 	MP4T_RecomputeBitRate(import->dest, track);
+ 	gf_set_progress("Importing AC3", tot_size, tot_size);
+

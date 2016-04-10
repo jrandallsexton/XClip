@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset='utf-8'/>
+		<title>Random Stuff</title>
+		<link rel="stylesheet" href="css/ui-darkness/jquery-ui-1.8.22.custom.css" type="text/css" media="all" />
+		<link rel="stylesheet" href="css/dirty.css" type="text/css" media="all" />
+		<link rel="stylesheet" href="css/rateit.css" type="text/css" media="all" />
+		<script type="text/javascript" src="http://ajax.cdnjs.com/ajax/libs/json2/20110223/json2.js"></script>
+		<script type="text/javascript" src="js/jquery-1.7.2.min.js"></script>
+		<script type="text/javascript" src="js/jquery-ui-1.8.22.custom.min.js"></script>
+		<script type="text/javascript" src="js/jquery.rateit.js" id="rateit"></script>
+	</head>
+	<body style="background-color:#000">
+		<div id="container">
+			<div id="header"></div>
+			<div id="navigation"></div>
+			<div id="content">
+			</div>
+			<div id="footer"></div>
+		</div>
+	</body>
+	<div id="messageDialog" style="display: none" title=""></div>
+	<div id="dialog-form" title="Security Question" style="display: none" >
+		<label for="name">Where was our first date?</label>
+		<input type="text" style="width:100%" id="txtDate" value="" class="text ui-widget-content ui-corner-all"></input>
+	</div>
+	<div id="dialogExplain" title="Anything to add?" style="display: none" >
+		<label for="name">Any reason why you rated it that way?</label>
+		<input type="text" style="width:100%" id="txtReason" class="text ui-widget-content ui-corner-all" />
+	</div>
+	<script type="text/javascript" src="js/utilityFunctions.js" id="utilityFunctions"></script>
+	<script type="text/javascript" src="js/scripts.js" id="scripts"></script>
+    <script type="text/javascript" defer="defer">$(document).ready(function () { initDefaultHtml(); });</script>	
+</html>

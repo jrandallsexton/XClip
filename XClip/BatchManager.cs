@@ -22,9 +22,9 @@ namespace XClip
             return _repo.Save(fName, fExt, fileSize, created);
         }
 
-        public XSource RandomSource()
+        public XSource RandomSource(int collectionId)
         {
-            return _repo.RandomSource();
+            return _repo.RandomSource(collectionId);
         }
 
         public KeyValuePair<Guid, string> Source(Guid id)

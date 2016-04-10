@@ -1,0 +1,3 @@
+
+
+1.  Ensure .mp4 MIME type exists in IIS.  Add at Global level via:  http://www.vigleo.com/VideoBlog/tabid/104/UploadVideo/11/How-to-add-MP4-MIME-Type-in-IIS7.aspx

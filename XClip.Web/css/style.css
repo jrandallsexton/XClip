@@ -1,0 +1,58 @@
+.bigdrop.select2-container .select2-results {
+	max-height: 500px;
+	font-size: 16px;
+	min-width: 200px;
+}
+
+.media-row {
+	padding-top: 10px;
+}
+
+.bigdrop .select2-results {
+	max-height: 500px;
+	min-width: 200px;
+}
+
+.bigdrop .select2-choices {
+	min-width: 200px;
+	min-height: 400px;
+	max-height: 500px;
+	overflow-y: auto;
+}
+
+p {
+	padding-bottom: 10px;
+}
+
+table, tr, td
+{
+	border:1px solid white;
+}
+
+tr.even {
+	background: #141412;
+	color: #FFFFFF;
+}
+
+tr.odd {
+	background: #CCCCB2;
+	color: #020202;
+}
+
+.convoTable { 
+	width: 100%;
+	font-size: 12px;
+}
+ 
+td { padding-left: 5px; }
+ 
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 14px;
+    padding: 10px;
+}
+
+h1 {
+    margin: 0px 0px 10px;
+    font-size: 22px;
+}

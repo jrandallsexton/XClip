@@ -1,0 +1,92 @@
+﻿body {font-family: "Helvetica Neue", Helvetica, Arial, default;font-size: 12px;font-style: normal;background: #eaeaea; color: #4a4a4a; padding-top:40px;}
+/* default link style */
+a {font-size:100%; font-weight:normal; color:#333333;text-decoration:none;}
+a:hover{text-decoration:underline; color:#333333;}
+/* New Text and Link Sizes Added VSK 7.0*/
+.mini-text, a.mini-text { font-size:93%; }
+.normal-text, a.normal-text{font-size:100%;}
+.medium-text, a.medium-text{font-size:108%;}
+.xmedium-text, a.xmedium-text{font-size:116%;}
+.xxmedium-text, a.xxmedium-text{font-size:123.1%;}
+.large-text, a.large-text{font-size:131%;}
+.xlarge-text, a.xlarge-text{font-size:138.5%; line-height:22px;}
+.xxlarge-text, a.xxlarge-text{font-size:146.5%;}
+.big-text, a.big-text{font-size:161.6%;}
+.xbig-text, a.xbig-text{font-size:167%;}
+.xxbig-text, a.xxbig-text{font-size:182%;}
+.xxxbig-text, a.xxxbig-text{font-size:197%;}
+.reverse, a.reverse {color:#6a6a6a;}
+.red, a.red {color:#c60000;}
+.green,a.green {color:#00890d;}
+.light,a.light {color:#888888;}
+.white,a.white{color:#fff;}
+.black,a.black{color:#000;}
+.bold,a.bold {font-weight:bold;}
+.underline,a.underline, a.underline:hover { text-decoration:underline; }
+.nounderline,a.nounderline, a.nounderline:hover {text-decoration:none;}
+.line-through,a.line-through, a.line-through:hover  {  text-decoration:line-through;}
+.ptext { font:normal 108% verdana; line-height:20px;}
+
+/* header styles */
+h1{font-size:161.6%; font-weight:bold; color: #222222;}
+h2{font-size:138.5%; font-weight:bold; color:#222222;}
+h1.lsttitle{font-size:131.1%;  line-height: 27px; font-weight:bold; color: #222222;}
+h3{font-size: 131.1%; font-weight:bold; color:#222222;}
+h3.alt{font-size:131.1%; font-weight:bold; color:#e7e8ed;}
+h4{font-size:116%; font-weight:normal; color:#000;}
+
+/* Utility Classes */
+.clear{clear:both;}
+img{border:none;vertical-align:middle;}
+table{border:none; padding:0px; margin:0px; width:100%;}
+.separator_10px{height:10px;}
+.pd_5{padding:5px;}
+.pd_10{padding:10px;}
+.item{text-align:left;}
+.item_c{text-align:center;}
+.item_pad{text-align:left; padding-top:7px;}
+.item_r{text-align:right;}
+.item_pad_2{padding:2px 0px;text-align:left;}
+.item_pad_2_c{padding:2px 0px;text-align:center;}
+.item_pad_2_r{padding:2px 0px;text-align:right;}
+.item_pad_4{padding:4px 0px;text-align:left;}
+.item_pad_4_c{padding:4px 0px;text-align:center;}
+.item_pad_4_r{padding:4px 0px;text-align:right;}
+.field_item_left{padding:6px 0px 0px 0px;float:left;width:30%;text-align:right;}
+.field_item_right{padding:2px 0px;float:right;width:68%;text-align:left;}
+.customize_item_left{padding:6px 0px 0px 0px;float:left;width:20%;text-align:right;}
+.customize_item_right{padding:2px 0px;float:right;width:78%;text-align:left;}
+
+/* group layouting new */
+.main_block{background:#d3d3d3;padding:7px;}
+.main_block_t_mrg{background:#d3d3d3;padding:7px; margin-top:7px;}
+.main_block_pd2{background:#daf4ff;padding:2px;}
+.module{background:#fff;padding:5px 7px;}
+.module_t_mrg{margin-top:7px;background:#fff;padding:5px 7px;}
+.module_alt{background:#EAE9E9;padding:10px;}
+.module_t_mrg_alt{margin-top:7px;background:#EAE9E9;padding:10px;}
+.module_heading{background:#daf4ff;padding:0px;}
+
+.well {border : 1px solid #ccc;background-color: #f3f3f3; padding:7px;}
+.well-spad{border : 1px solid #eee;padding:2px;background-color: #f5f5f5; }
+
+
+
+.btn-large {font-size: 14px;font-weight: normal;padding: 8px 15px;-webkit-border-radius: 6px;-moz-border-radius: 6px;border-radius: 6px;}
+.btn-small {padding: 5px 9px;font-size: 12px;line-height: 16px;-webkit-border-radius: 4px;-moz-border-radius: 4px;border-radius: 4px;}
+.btn-mini {padding: 2px 6px;font-size: 11px;-webkit-border-radius: 2px;-moz-border-radius: 2px;border-radius: 2px;}
+
+
+.prating .progress {
+ height: 8px; margin-bottom: 8px;
+  overflow: hidden;
+  background-color: #ff0000;
+    background-repeat: repeat-x;
+    -webkit-border-radius: 4px;
+    -moz-border-radius: 4px;
+    border-radius: 4px;
+    -webkit-box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.1);
+    -moz-box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.1);
+    box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.1);
+    background-image: linear-gradient(top, #ff0000, #bc0000);
+}

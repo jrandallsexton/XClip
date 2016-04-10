@@ -1,0 +1,40 @@
+<asp:button runat="server" cssClass="btn btn-primary btn-small" />
+<asp:button runat="server" cssClass="btn btn-primary btn-large" skinid="primarylarge" />
+<asp:button runat="server" cssClass="btn btn-primary btn-mini" skinid="primarymini" />
+<asp:button runat="server" cssClass="btn btn-mini" skinid="normalmini" />
+<asp:button runat="server" cssClass="btn btn-large" skinid="normallarge" />
+<asp:button runat="server" cssClass="btn btn-small" skinid="normalsmall" />
+<asp:button runat="server" cssClass="btn" skinid="normal" />
+<asp:button runat="server" cssClass="btn btn-warning btn-mini" skinid="warningmini" />
+<asp:button runat="server" cssClass="btn btn-warning btn-large" skinid="warninglarge" />
+<asp:button runat="server" cssClass="btn btn-warning btn-small" skinid="warningsmall" />
+<asp:button runat="server" cssClass="btn btn-danger btn-mini" skinid="dangermini" />
+<asp:button runat="server" cssClass="btn btn-danger btn-large" skinid="dangerlarge" />
+<asp:button runat="server" cssClass="btn btn-danger btn-small" skinid="dangersmall" />
+<asp:button runat="server" cssClass="btn btn-success btn-mini" skinid="successmini" />
+<asp:button runat="server" cssClass="btn btn-success btn-large" skinid="successlarge" />
+<asp:button runat="server" cssClass="btn btn-success btn-small" skinid="successsmall" />
+<asp:button runat="server" cssClass="btn btn-info btn-mini" skinid="infoini" />
+<asp:button runat="server" cssClass="btn btn-info btn-large" skinid="infolarge" />
+<asp:button runat="server" cssClass="btn btn-info btn-small" skinid="infosmall" />
+<asp:button runat="server" cssClass="btn btn-inverse btn-mini" skinid="inversemini" />
+<asp:button runat="server" cssClass="btn btn-inverse btn-large" skinid="inverselarge" />
+<asp:button runat="server" cssClass="btn btn-inverse btn-small" skinid="inversesmall" />
+
+<asp:LinkButton runat="server" cssClass="btn btn-primary btn-mini" skinid="primarymini" />
+<asp:LinkButton runat="server" cssClass="btn btn-primary btn-large" skinid="primarylarge" />
+<asp:LinkButton runat="server" cssClass="btn btn-primary btn-small" skinid="primary" />
+<asp:LinkButton runat="server" cssClass="btn btn-small" skinid="normal" />
+
+<asp:TextBox runat="server" CssClass="uneditable-input" skinid="uneditable" />
+<asp:TextBox runat="server" CssClass="input-xlarge focused" skinid="focused" />
+<asp:TextBox runat="server" CssClass="input-xlarge disabled" skinid="disabled" />
+
+<asp:TextBox runat="server" CssClass="input-mini" skinid="mini" />
+<asp:TextBox runat="server" CssClass="input-small" skinid="small" />
+<asp:TextBox runat="server" CssClass="input-medium" skinid="medium" />
+<asp:TextBox runat="server" CssClass="input-xlarge" skinid="large" />
+<asp:TextBox runat="server" CssClass="input-xxlarge" skinid="extralarge" />
+
+<asp:DropDownList runat="server" CssClass="focused" skinid="focussed" />
+<asp:DropDownList runat="server" CssClass="disabled" skinid="disabled" />

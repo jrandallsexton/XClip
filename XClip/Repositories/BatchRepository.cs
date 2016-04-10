@@ -39,16 +39,34 @@ namespace XClip.Repositories
 
         }
 
-        public XSource RandomSource()
+        public XSource RandomSource(int collectionId)
         {
+            var sb = new StringBuilder();
+            sb.AppendLine("declare @SourceId int");
+            sb.AppendLine("select top 1 @SourceId = BI.[Id]");
+            sb.AppendLine("FROM [BatchSources] BI");
+            sb.AppendLine("WHERE (BI.Reviewed IS NULL) AND");
+            sb.AppendLine("(BI.Deleted IS NULL) AND");
+            sb.AppendLine("(BI.Skipped IS NULL) AND");
+            sb.AppendLine("(BI.FileExt = '.mp4') AND");
+            sb.AppendLine("(BI.CollectionId = @CollectionId)");
+            sb.AppendLine("ORDER BY NEWID()");
+            sb.AppendLine("SELECT BS.Id, BS.UId, BS.[Filename], BS.[FileExt], BS.[Filesize], BS.[Created]");
+            sb.AppendLine("from [BatchSources] BS");
+            sb.AppendLine("where BS.Id = @SourceId");
 
-            using (var rdr = base.OpenDataReader("sprMediaSourceRandom", new List<SqlParameter>()))
+            var paramList = new List<SqlParameter>
+            {
+                new SqlParameter("CollectionId", collectionId)
+            };
+
+            using (var rdr = base.OpenDataReaderInLine(sb.ToString(), paramList))
             {
                 if ((rdr == null) || (!rdr.HasRows)) { return null; }
 
                 rdr.Read();
 
-                return new XSource(rdr.GetGuid(0), rdr.GetString(1), rdr.GetString(2));
+                return new XSource(rdr.GetInt32(0), rdr.GetGuid(1), rdr.GetString(2), rdr.GetString(3), rdr.GetInt64(4), rdr.GetDateTime(5));
             }
 
         }
@@ -136,14 +154,6 @@ namespace XClip.Repositories
         public bool MarkSourceAsReviewed(Guid id)
         {
             const string sql = "UPDATE [BatchSources] SET [Reviewed] = GetDate() WHERE [Id] = @Id";
-            var paramList = new List<SqlParameter> { new SqlParameter("@Id", id) };
-
-            return base.ExecuteInLineSql(sql, paramList);
-        }
-
-        public bool MarkSourceAsSkipped(Guid id)
-        {
-            const string sql = "UPDATE [BatchSources] SET [Skipped] = GetDate() WHERE [Id] = @Id";
             var paramList = new List<SqlParameter> { new SqlParameter("@Id", id) };
 
             return base.ExecuteInLineSql(sql, paramList);

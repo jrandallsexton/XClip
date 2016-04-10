@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="shortcut icon" href="../../docs-assets/ico/favicon.png">
+    <title>CutInfo Creator</title>
+    <link href="css/bootstrap.css" rel="stylesheet">
+    <link href="css/jumbotron.css" rel="stylesheet">
+    <link href="css/select2.css" rel="stylesheet">
+    <link href="css/style.css" rel="stylesheet">
+  </head>
+  <body>
+    <div class="navbar navbar-inverse navbar-fixed-top">
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="#">XClip Creator</a>
+        </div>
+        <div class="navbar-collapse collapse">
+          <form class="navbar-form navbar-right">
+            <div class="form-group">
+              <!--<input type="text" placeholder="Email" class="form-control">-->
+            </div>
+            <div class="form-group">
+              <!--<input type="password" placeholder="Password" class="form-control">-->
+            </div>
+            <!--<button id='login' type="submit" class="btn btn-primary btn-lg" onclick="foo()" >
+            	<img src="img/fbicon.png" style="float:left;margin-right:2px;" />Sign in with Facebook</button>-->
+          </form>
+        </div><!--/.navbar-collapse -->
+      </div>
+    </div>
+	<div class="jumbotron">
+		<div class="container">
+			<div class="media col-lg-6">
+				<div class="row"><video preload="auto" id="videoPlayer" style="width:800px; height:600px;" controls muted/></div>
+				<div class="row media-row">
+					<a id="btnPlayPause" class="ctl btn btn-primary btn-lg" role="button" onclick="onPlayPause()">
+						Play <span class="glyphicon glyphicon-play"></span>
+					</a>
+					<a class="ctl fine btn btn-primary btn-lg" role="button" data-value="-1">- 1</a>
+					<a class="ctl fine btn btn-primary btn-lg" role="button" data-value="-0.5">- 0.5</a>
+					<a class="ctl fine btn btn-primary btn-lg" role="button" data-value="-0.25">- 0.25</a>
+					<a class="ctl fine btn btn-primary btn-lg" role="button" data-value="0.25">+ 0.25</a>
+					<a class="ctl fine btn btn-primary btn-lg" role="button" data-value="0.5">+ 0.5</a>
+					<a class="ctl fine btn btn-primary btn-lg" role="button" data-value="1">+ 1</a>
+					<a id="btnSetStart" class="ctl btn btn-primary btn-lg" role="button" onclick="onSetStart()">
+						<span class="glyphicon glyphicon-map-marker"></span> In
+					</a>
+					<a id="btnSetEnd" class="ctl btn btn-primary btn-lg" role="button" onclick="onSetEnd()">
+						Out <span class="glyphicon glyphicon-map-marker"></span>
+					</a>
+				</div>
+			</div>
+			<div class="media-body col-lg-6" style="padding-left:40px;">
+				<div class="row media-row">
+					<div class="col-md-8">
+						<h4><span class="glyphicon glyphicon-film"></span> <label id="fname"></label></h4>
+					</div>
+					<div class="col-md-2">
+						<a id="btnSkip" class="btn btn-primary btn-lg btn-block" role="button" onclick="skipSource()"> Skip <span class="glyphicon glyphicon-refresh"></span></a>
+					</div>
+					<div class="col-md-2">
+						<a id="btnDelete" class="btn btn-primary btn-lg btn-block" role="button" onclick="deleteSource()">	Delete <span class="glyphicon glyphicon-minus"></span></a>
+					</div>
+				</div>
+				<div class="row media-row">
+					<div class="input-group" style="width:100%">
+						<span class="input-group-addon" id="basic-addon1">Video Tags</span>
+						<div id="vidTag" aria-describedby="basic-addon1" style="width:100%"></div>
+					</div>
+				</div>
+				<div class="row media-row">
+				  <div class="input-group" style="width:100%">
+					  <span class="input-group-addon" id="basic-addon2">Clip Tags</span>
+					  <div id="clipTag" aria-describedby="basic-addon2" style="width:100%"></div>
+				  </div>
+				</div>
+				<div class="row media-row">
+					<div class="col-md-4">
+						<div class="input-group input-group-lg">
+                            <span class="input-group-addon">Start</span>
+                            <input id="in" type="text" class="form-control" placeholder="Not Set"/>
+						</div>
+					</div>
+					<div class="col-md-4">
+						<div class="input-group input-group-lg">
+							<span class="input-group-addon">Stop</span>
+							<input id="out" type="text" class="form-control" placeholder="Not Set"/>
+						</div>
+					</div>
+					<div class="col-md-2"><a id="btnAdd" class="btn btn-primary btn-lg btn-block" role="button" onclick="addBatchItem()"> Add <span class="glyphicon glyphicon-plus"></span></a></div>
+					<div class="col-md-2"><a id="btnSave" class="btn btn-primary btn-lg btn-block" role="button" onclick="saveBatch()"> Save <span class="glyphicon glyphicon-plus"></span></a></div>
+				</div>
+				<div class="row media-row">
+					<!--<div id="itemTags" class="input-group input-group-sm"></div>-->
+					<ul id="lstCuts" class="list-group"></ul>
+					<div id="srcTags" class="input-group input-group-sm"></div>
+				</div>
+			</div>
+		</div>
+    </div>
+	<script type="text/javascript" src="http://ajax.cdnjs.com/ajax/libs/json2/20110223/json2.js"></script>
+	<script type="text/javascript" src="js/jquery-1.9.1.js"></script>
+    <script src="//netdna.bootstrapcdn.com/bootstrap/3.0.1/js/bootstrap.min.js"></script>
+	<script type="text/javascript" src="js/utilityFunctions.js"></script>
+	<script type="text/javascript" src="js/select2.min.js"></script>
+    <script type="text/javascript" src="js/apiWrapper.js"></script>
+    <script type="text/javascript" src="js/models/mediaSource.js"></script>
+	<script type="text/javascript" src="js/models/batch.js"></script>
+	<script type="text/javascript" src="js/models/batchItem.js"></script>
+	<script type="text/javascript" src="js/cutInfo.js"></script>
+    <script type="text/javascript" defer="defer">$(document).ready(function () { initHtml(); });</script>	
+  </body>
+</html>

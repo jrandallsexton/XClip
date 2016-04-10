@@ -29,6 +29,12 @@ namespace XClip.Config
             get { return (string)this["description"]; }
         }
 
+        [ConfigurationProperty("dirRoot", IsRequired = true, IsKey = true)]
+        public string DirectoryRoot
+        {
+            get { return (string)this["dirRoot"]; }
+        }
+
         [ConfigurationProperty("dirIn", IsRequired = true, IsKey = true)]
         public string DirectoryIn
         {
@@ -39,6 +45,18 @@ namespace XClip.Config
         public string DirectoryOut
         {
             get { return (string)this["dirOut"]; }
+        }
+
+        [ConfigurationProperty("FfMpegLocation", IsRequired = true, IsKey = true)]
+        public string FfMpegLocation
+        {
+            get { return (string)this["FfMpegLocation"]; }
+        }
+
+        [ConfigurationProperty("allowedExtensions", IsRequired = true, IsKey = true)]
+        public string AllowedExtensions
+        {
+            get { return (string)this["allowedExtensions"]; }
         }
     }
 }

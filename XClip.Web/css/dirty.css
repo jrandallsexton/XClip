@@ -1,0 +1,58 @@
+
+label {
+	color:rgb(255,255,255);
+	font-family: "Arial";
+	font-size: 18px;	
+}
+
+.answers{
+	color:rgb(255,255,255);
+	font-family: "Arial";
+	font-size: 18px;
+}
+
+.rating {
+	color:rgb(255,255,255);
+	font-family: "Arial";
+	font-size: 12px;	
+}
+
+p {
+	color:rgb(255,255,255);
+	font-family: "Arial";
+	font-size: 22px;
+}
+
+.buttonStyleNew {
+	height:100px;
+	width: 122px;
+}
+
+.buttonStyle {
+	height:40px;
+	width: 100px;
+	padding: 5px 15px 15px 15px;
+}
+
+.scoreStyle {
+	font: arial;
+	font-size: 40px;
+}
+
+.hitCountStyle {
+	font: arial;
+	font-size: 25px;
+}
+
+.activeColumn {
+	background-color: #f58400;
+}
+
+table, th, td
+{
+	text-align: center;
+}
+
+.sum {
+	border: 0px solid white;
+}

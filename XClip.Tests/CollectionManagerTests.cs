@@ -1,8 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿
+using System;
+
 using NUnit.Framework;
 
 namespace XClip.Tests
@@ -11,15 +9,22 @@ namespace XClip.Tests
     public class CollectionManagerTests
     {
         [Test]
-        public void Create_Succeds()
+        public void Create_Succeeds()
         {
-            
+            var collectionId = new CollectionManager().Create(1, "Drone Footage");
+            Assert.That(collectionId > 1);
         }
 
         [Test]
         public void CreateFailsWhenCollectionNameIsEmpty()
         {
-            
+            Assert.Throws<ArgumentException>(() => new CollectionManager().Create(1, string.Empty));
+        }
+
+        [Test]
+        public void Delete_Succeeds()
+        {
+            new CollectionManager().Delete(1, 1);
         }
     }
 }

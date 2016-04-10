@@ -1,22 +1,38 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿
+using System;
 
 namespace XClip.DataObjects
 {
     public class XSource
     {
-        public Guid Id { get; set; }
+        public int Id { get; set; }
+
+        public Guid UId { get; set; }
+
         public string FName { get; set; }
+
         public string FExt { get; set; }
 
-        public XSource(Guid id, string fName, string fExt)
+        public long FSize { get; set; }
+
+        public DateTime FDate { get; set; }
+
+        public XSource(string fName, string fExt, long fSize, DateTime fDate)
         {
-            this.Id = id;
             this.FName = fName;
             this.FExt = fExt;
+            this.FSize = fSize;
+            this.FDate = fDate;
+        }
+
+        public XSource(int id, Guid uId, string fName, string fExt, long fSize, DateTime fDate)
+        {
+            this.Id = id;
+            this.UId = uId;
+            this.FName = fName;
+            this.FExt = fExt;
+            this.FSize = fSize;
+            this.FDate = fDate;
         }
     }
 }

@@ -1,0 +1,1 @@
+var URL_REST_SVC = 'http://dirty.lazycodeslinger.com/dirtyRestSvc';
