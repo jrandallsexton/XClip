@@ -36,5 +36,33 @@ namespace XClip
         {
             return _repo.BatchInfoSave(batch);
         }
+
+        public List<XBatch> GetOpen(int userId, int collectionId)
+        {
+            var openBatches = new List<XBatch>();
+
+            var openBatchIds = _repo.OpenBatchIds(collectionId);
+
+            if (openBatchIds == null || openBatchIds.Count == 0)
+                return openBatches;
+
+            openBatchIds.ForEach(x =>
+            {
+                openBatches.Add(_repo.Get(x));
+            });
+
+            return openBatches;
+
+        }
+
+        public void MarkStarted(Guid batchUId)
+        {
+            _repo.MarkStarted(batchUId);
+        }
+
+        public void MarkCompleted(Guid batchUId, DateTime end)
+        {
+            _repo.MarkCompleted(batchUId, end);
+        }
     }
 }

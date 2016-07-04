@@ -10,8 +10,11 @@ using XClip.DataObjects;
 
 namespace XClip.Repositories
 {
-    public class BatchRepository : SqlBaseDal
+    public class BatchRepository : RepositoryBase
     {
+
+        private SqlBaseDal _dal = new SqlBaseDal();
+
         public bool FileExists(string fName)
         {
 
@@ -19,7 +22,7 @@ namespace XClip.Repositories
 
             var paramList = new List<SqlParameter> { new SqlParameter("@Fname", fName) };
 
-            return base.ExecuteScalarInLine(sql, paramList) > 0;
+            return _dal.ExecuteScalarInLine(sql, paramList) > 0;
 
         }
 
@@ -60,7 +63,7 @@ namespace XClip.Repositories
                 new SqlParameter("CollectionId", collectionId)
             };
 
-            using (var rdr = base.OpenDataReaderInLine(sb.ToString(), paramList))
+            using (var rdr = _dal.OpenDataReaderInLine(sb.ToString(), paramList))
             {
                 if ((rdr == null) || (!rdr.HasRows)) { return null; }
 
@@ -75,7 +78,7 @@ namespace XClip.Repositories
         {
             var sql = "SELECT [Filename] FROM [BatchSources] WHERE [Id] = '" + id.ToString() + "'";
 
-            using (var rdr = base.OpenDataReaderInLine(sql, new List<SqlParameter>()))
+            using (var rdr = _dal.OpenDataReaderInLine(sql, new List<SqlParameter>()))
             {
                 if ((rdr == null) || (!rdr.HasRows)) { return new KeyValuePair<Guid, string>(Guid.Empty, string.Empty); }
 
@@ -85,9 +88,9 @@ namespace XClip.Repositories
             }
         }
 
-        private bool SaveBatchItemTags(Guid batchItemId, List<int> tagIds)
+        private bool SaveBatchItemTags(int batchItemId, IEnumerable<int> tagIds)
         {
-            const string sql = "INSERT INTO [BatchItemsTags] ([ItemId], [TagId]) VALUES ('{0}', {1})";
+            const string sql = "INSERT INTO [BatchItemsTags] ([ItemId], [TagId]) VALUES ({0}, {1})";
 
             foreach (var i in tagIds)
             {
@@ -97,28 +100,28 @@ namespace XClip.Repositories
             return true;
         }
 
-        public bool BatchItemsSave(Guid batchId, List<XBatchItem> items)
+        public bool BatchItemsSave(int batchId, List<XBatchItem> items)
         {
 
-            const string sql = "INSERT INTO [BatchItems] ([Id], [BatchId], [Index], [StartTime], [StopTime], [Duration]) VALUES (@Id, @BatchId, @Index, @Start, @Stop, @Dur)";
+            const string sql = "INSERT INTO [BatchItems] ([UId], [BatchId], [Index], [StartTime], [StopTime], [Duration]) VALUES (@UId, @BatchId, @Index, @Start, @Stop, @Dur) SELECT SCOPE_IDENTITY()";
 
             var i = 0;
 
-            foreach (var ci in items)
+            foreach (var batchItem in items)
             {
 
                 var paramList = new List<SqlParameter>
                 {
-                    new SqlParameter("@Id", ci.Id),
+                    new SqlParameter("@UId", batchItem.UId),
                     new SqlParameter("@BatchId", batchId),
                     new SqlParameter("@Index", i),
-                    new SqlParameter("@Start", ci.Start),
-                    new SqlParameter("@Stop", ci.Stop),
-                    new SqlParameter("@Dur", ci.Duration)
+                    new SqlParameter("@Start", batchItem.Start),
+                    new SqlParameter("@Stop", batchItem.Stop),
+                    new SqlParameter("@Dur", batchItem.Duration)
                 };
 
-                base.ExecuteInLineSql(sql, paramList);
-                this.SaveBatchItemTags(ci.Id, ci.Tags);
+                var batchItemId = base.ExecuteIdentity(sql, paramList);
+                this.SaveBatchItemTags(batchItemId, batchItem.Tags);
 
                 i++;
 
@@ -130,31 +133,52 @@ namespace XClip.Repositories
 
         public bool BatchInfoSave(XBatch batch)
         {
-            const string sql = "INSERT INTO [Batches] ([Id], [SourceId], [OutputMask]) VALUES (@Id, @SrcId, @OM)";
+            const string sql = "INSERT INTO [Batches] ([UId], [SourceId], [OutputMask]) VALUES (@UId, @SrcId, @OM) SELECT SCOPE_IDENTITY()";
 
             var paramList = new List<SqlParameter>
             {
-                new SqlParameter("@Id", batch.Id),
+                new SqlParameter("@UId", batch.UId),
                 new SqlParameter("@SrcId", batch.SrcId),
                 new SqlParameter("@OM", batch.OutputMask)
             };
 
-            if (this.ExecuteInLineSql(sql, paramList))
+            batch.Id = base.ExecuteIdentity(sql, paramList);
+            if (this.BatchItemsSave(batch.Id, batch.Items))
             {
-                if (this.BatchItemsSave(batch.Id, batch.Items))
-                {
-                    return this.MarkSourceAsReviewed(batch.SrcId);
-                }
+                return this.MarkSourceAsReviewed(batch.SrcId);
             }
 
             return false;
 
         }
 
+        public void MarkStarted(Guid batchUId)
+        {
+            var sql = "UPDATE dbo.[Batches] SET [ProcStart] = GetUtcDate() WHERE [UId] = @UId";
+            var paramList = new List<SqlParameter>
+            {
+                new SqlParameter("@UId", batchUId)
+            };
+
+            base.ExecuteInLineSql(sql, paramList);
+        }
+
+        public void MarkCompleted(Guid batchUId, DateTime end)
+        {
+            var sql = "UPDATE dbo.[Batches] SET [ProcEnd] = @End, [Completed] = GetUtcDate() WHERE [UId] = @UId";
+            var paramList = new List<SqlParameter>
+            {
+                new SqlParameter("@End", end),
+                new SqlParameter("@UId", batchUId)
+            };
+
+            base.ExecuteInLineSql(sql, paramList);
+        }
+
         public bool MarkSourceAsReviewed(Guid id)
         {
-            const string sql = "UPDATE [BatchSources] SET [Reviewed] = GetDate() WHERE [Id] = @Id";
-            var paramList = new List<SqlParameter> { new SqlParameter("@Id", id) };
+            const string sql = "UPDATE [BatchSources] SET [Reviewed] = GetDate() WHERE [UId] = @UId";
+            var paramList = new List<SqlParameter> { new SqlParameter("@UId", id) };
 
             return base.ExecuteInLineSql(sql, paramList);
         }
@@ -167,19 +191,19 @@ namespace XClip.Repositories
             return base.ExecuteInLineSql(sql, paramList);
         }
 
-        private List<XBatchItem> GetBatchItems(Guid batchId)
+        private List<XBatchItem> GetBatchItems(int batchId)
         {
             var values = new List<XBatchItem>();
 
             var sql = new StringBuilder();
-            sql.AppendLine("select BI.[Id], BI.[Index], BI.StartTime, BI.StopTime, BI.Duration");
+            sql.AppendLine("select BI.[Id], BI.[UId], BI.[Index], BI.StartTime, BI.StopTime, BI.Duration");
             sql.AppendLine("from BatchItems BI");
             sql.AppendLine("where BI.BatchId = @Id");
             sql.AppendLine("order by bi.[Index]");
 
             var paramList = new List<SqlParameter> { new SqlParameter("@Id", batchId) };
 
-            using (var rdr = base.OpenDataReaderInLine(sql.ToString(), paramList))
+            using (var rdr = _dal.OpenDataReaderInLine(sql.ToString(), paramList))
             {
 
                 if ((rdr == null) || (!rdr.HasRows)) { return null; }
@@ -188,10 +212,11 @@ namespace XClip.Repositories
                 {
                     var info = new XBatchItem
                     {
-                        Id = rdr.GetGuid(0),
-                        Index = rdr.GetInt32(1),
-                        Start = rdr.GetString(2),
-                        Stop = rdr.GetString(3)
+                        Id = rdr.GetInt32(0),
+                        UId = rdr.GetGuid(1),
+                        Index = rdr.GetInt32(2),
+                        Start = rdr.GetString(3),
+                        Stop = rdr.GetString(4)
                     };
                     info.Duration = (decimal.Parse(info.Stop) - decimal.Parse(info.Start)).ToString(CultureInfo.InvariantCulture);
 
@@ -206,16 +231,16 @@ namespace XClip.Repositories
         public XBatch Get(Guid id)
         {
             var sql = new StringBuilder();
-            sql.AppendLine("SELECT B.[Id], bsrc.[Filename], b.[OutputMask]");
+            sql.AppendLine("SELECT B.[Id], B.SourceId, bsrc.[Filename], b.[OutputMask]");
             sql.AppendLine("FROM [Batches] B");
-            sql.AppendLine("inner join [BatchSources] BSrc on bSrc.Id = B.SourceId ");
-            sql.AppendLine("where B.[Id] = @Id");
+            sql.AppendLine("inner join [BatchSources] BSrc on bSrc.UId = B.SourceId ");
+            sql.AppendLine("where B.[UId] = @UId");
 
-            var paramList = new List<SqlParameter> { new SqlParameter("@Id", id) };
+            var paramList = new List<SqlParameter> { new SqlParameter("@UId", id) };
 
             XBatch info = null;
 
-            using (var rdr = base.OpenDataReaderInLine(sql.ToString(), paramList))
+            using (var rdr = _dal.OpenDataReaderInLine(sql.ToString(), paramList))
             {
 
                 if ((rdr == null) || (!rdr.HasRows)) { return null; }
@@ -224,10 +249,11 @@ namespace XClip.Repositories
 
                 info = new XBatch
                 {
-                    Id = id,
-                    SrcId = rdr.GetGuid(0),
-                    Filename = rdr.GetString(1),
-                    OutputMask = rdr.GetString(2)
+                    Id = rdr.GetInt32(0),
+                    UId = id,
+                    SrcId = rdr.GetGuid(1),
+                    Filename = rdr.GetString(2),
+                    OutputMask = rdr.GetString(3)
                 };
 
             }
@@ -250,13 +276,15 @@ namespace XClip.Repositories
             base.ExecuteInLineSql(sql, new List<SqlParameter>());
         }
 
-        public List<Guid> openBatchIds()
+        public List<Guid> OpenBatchIds(int collectionId)
         {
-            const string sql = "SELECT [Id] FROM [Batches] WHERE [Completed] IS NULL ORDER BY [Created]";
+            const string sql = "SELECT b.[UId] FROM [XClip].[dbo].[Batches] B inner join dbo.BatchSources bs on bs.UId = b.SourceId where bs.CollectionId = @CollectionId and b.completed is null order by b.created";
 
             var ids = new List<Guid>();
 
-            using (var rdr = base.OpenDataReaderInLine(sql, new List<SqlParameter>()))
+            var paramList = new List<SqlParameter> { new SqlParameter("@CollectionId", collectionId) };
+
+            using (var rdr = _dal.OpenDataReaderInLine(sql, paramList))
             {
                 while (rdr.Read())
                 {
@@ -273,7 +301,7 @@ namespace XClip.Repositories
 
             const string sql = "select BS.Id, BS.[Filename] from [BatchSources] BS WHERE BS.[Reviewed] IS NULL AND BS.[Deleted] IS NULL AND BS.[Skipped] IS NULL ORDER BY BS.[Created] DESC";
 
-            using (var rdr = base.OpenDataReaderInLine(sql, new List<SqlParameter>()))
+            using (var rdr = _dal.OpenDataReaderInLine(sql, new List<SqlParameter>()))
             {
                 if ((rdr == null) || (!rdr.HasRows)) { return null; }
 

@@ -10,5 +10,6 @@ namespace XClip
     {
         public static string Mp4 = "video/mp4";
         public static string Wmv = "video/x-ms-wmv";
+        public static string Mov = "video/quicktime";
     }
 }

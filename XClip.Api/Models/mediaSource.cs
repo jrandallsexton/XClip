@@ -11,8 +11,15 @@ namespace XClip.Api.Models
         public Guid uId { get; set; }
 
         public string fName { get; set; }
+
         public string fExt { get; set; }
+
         public string mimeType { get; set; }
+
+        public mediaSource()
+        {
+            
+        }
 
         public mediaSource(int msId, Guid uId, string name, string ext)
         {
@@ -21,7 +28,20 @@ namespace XClip.Api.Models
             this.fName = name;
             this.fExt = ext;
 
-            this.mimeType = (ext == FileExtensions.Mp4) ? MimeTypes.Mp4 : MimeTypes.Wmv;
+            ext = ext.ToLower();
+
+            if (ext == FileExtensions.Mp4)
+            {
+                this.mimeType = MimeTypes.Mp4;
+            }
+            else if (ext == FileExtensions.Mov)
+            {
+                this.mimeType = MimeTypes.Mov;
+            }
+            else
+            {
+                this.mimeType = MimeTypes.Wmv;
+            }
 
         }
 

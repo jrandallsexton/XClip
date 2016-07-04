@@ -5,6 +5,7 @@ using System.IO;
 using System.Linq;
 using System.Text.RegularExpressions;
 using XClip.Config;
+using XClip.DataObjects;
 
 namespace XClip.Utils
 {
@@ -99,9 +100,12 @@ namespace XClip.Utils
 
         public void GenerateTags()
         {
+            var userId = 1;
+            var collectionId = 1;
+
             var tagMgr = new TagManager();
 
-            var tags = tagMgr.GetTags();
+            var tags = tagMgr.GetTags(userId, collectionId);
             var tagValues = tags.Values.ToList();
             var added = new List<string>();
 
@@ -148,5 +152,41 @@ namespace XClip.Utils
             //Console.WriteLine("{0} tagcount", tagValues.Count);
         }
 
+        public void LoadDroneFootage()
+        {
+            var config = XClipConfig.GetSection();
+            const string dirIn = @"F:\Dropbox\Drones\Clients\House";
+
+            var cm = new CollectionManager();
+
+            const int userId = 1;
+            const int collectionId = 2;
+
+            foreach (var tmp in new System.IO.DirectoryInfo(dirIn).EnumerateFiles("*.*", SearchOption.AllDirectories))
+            {
+                if (tmp.Extension == string.Empty)
+                    continue;
+
+                if (!config.AllowedExtensions.Contains(tmp.Extension.ToLower()))
+                    continue;
+
+                var xSource = new XSource()
+                {
+                    FileDate = tmp.CreationTimeUtc,
+                    FileExt = tmp.Extension,
+                    FileSize = tmp.Length,
+                    Filename = tmp.Name,
+                    UId = Guid.NewGuid()
+                };
+
+                cm.AddToCollection(collectionId, xSource, false, userId);
+
+                var src = Path.Combine(tmp.DirectoryName, tmp.Name);
+                var tgt = $"H:\\XClip\\Collections\\{collectionId}\\{xSource.UId}{tmp.Extension}";
+
+                Console.WriteLine($"Copy from {src} to {tgt}");
+                File.Copy(src, tgt);
+            }
+        }
     }
 }

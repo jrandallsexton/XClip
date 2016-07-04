@@ -14,7 +14,7 @@ namespace XClip.Api.Controllers
 
         [HttpPost]
         [Route]
-        public IHttpActionResult Post(batch batch)
+        public IHttpActionResult Post([FromBody]batch batch)
         {
 
             // get the mediaSource
@@ -24,7 +24,6 @@ namespace XClip.Api.Controllers
             {
                 batchItems.Add(new XBatchItem()
                 {
-                    Id = Guid.NewGuid(),
                     Tags = new List<int>(),
                     Duration = string.Empty,
                     Index = x.index,
@@ -33,10 +32,11 @@ namespace XClip.Api.Controllers
                 });    
             }
 
+            var source = new SourceManager().Get(batch.sourceId);
+
             var newBatch = new XBatch
             {
-                Filename = "foo",
-                Id = Guid.NewGuid(),
+                Filename = source.Filename,
                 InputDir = string.Empty,
                 Items = batchItems,
                 OutputDir = string.Empty,

@@ -1,4 +1,4 @@
-var batchItem = function(data) {
+var BatchItem = function(data) {
     this.index = null;
     this.start = null;
     this.stop = null;

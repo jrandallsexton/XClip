@@ -22,17 +22,19 @@ namespace XClip.Api.Controllers
         }
 
         [HttpPut]
-        [Route("{mediaId:alpha}")]
-        public IHttpActionResult Skip(string mediaId, [FromBody] string id)
+        [Route("{id}/skip")]
+        public IHttpActionResult Skip(Guid id)
         {
-            Guid uId;
-
-            if (!Guid.TryParse(id, out uId))
-                return NotFound();
-
-            new SourceManager().MarkAsSkipped(uId);
-
+            new SourceManager().MarkAsSkipped(id);
             return Ok("skipped");
+        }
+
+        [HttpPut]
+        [Route("{id}/delete")]
+        public IHttpActionResult Delete(Guid id)
+        {
+            new SourceManager().MarkAsDeleted(id);
+            return Ok("deleted");
         }
     }
 }

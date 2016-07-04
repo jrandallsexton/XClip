@@ -10,12 +10,28 @@ namespace XClip.Repositories
 {
     public class TagRepository : RepositoryBase
     {
-        public Dictionary<int, string> Tags()
+        public Dictionary<int, string> Tags(int userId, int? collectionId)
         {
+            var sql = string.Empty;
+
+            var paramList = new List<SqlParameter>
+            {
+                new SqlParameter("UserId", userId)
+            };
+
+            if (collectionId.HasValue)
+            {
+                sql = "select t.[id], t.[Text] from [tags] t where t.[UserId] = @UserId and t.[CollectionId] = @CollectionId order by t.[text]";
+                paramList.Add(new SqlParameter("CollectionId", collectionId.Value));
+            }
+            else
+            {
+                sql = "select t.[id], t.[Text] from [tags] t where t.[UserId] = @UserId order by t.[text]";
+            }
 
             var values = new Dictionary<int, string>();
 
-            using (var rdr = new SqlBaseDal().OpenDataReaderInLine("select t.[id], t.[Text] from [tags] t order by t.[text]", new List<SqlParameter>()))
+            using (var rdr = new SqlBaseDal().OpenDataReaderInLine(sql, paramList))
             {
                 if ((rdr == null) || (!rdr.HasRows))
                     return values;

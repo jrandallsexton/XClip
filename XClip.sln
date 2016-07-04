@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
-VisualStudioVersion = 14.0.24720.0
+VisualStudioVersion = 14.0.25123.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "XClip", "XClip\XClip.csproj", "{7924E56C-35D1-4AA1-AA9C-25AE93A86345}"
 EndProject
@@ -10,6 +10,8 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "XClip.Utils", "XClip.Utils\XClip.Utils.csproj", "{4EB65B5F-E752-4306-9C5A-9C0AB98F87BD}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "XClip.Api", "XClip.Api\XClip.Api.csproj", "{FAD9221C-B27B-411D-91DB-D0B10CD67336}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "XClip.Processor", "XClip.Processor\XClip.Processor.csproj", "{D46CD13A-D88A-49AE-A235-FEBAE4012041}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -33,6 +35,10 @@ Global
 		{FAD9221C-B27B-411D-91DB-D0B10CD67336}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{FAD9221C-B27B-411D-91DB-D0B10CD67336}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{FAD9221C-B27B-411D-91DB-D0B10CD67336}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D46CD13A-D88A-49AE-A235-FEBAE4012041}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D46CD13A-D88A-49AE-A235-FEBAE4012041}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D46CD13A-D88A-49AE-A235-FEBAE4012041}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D46CD13A-D88A-49AE-A235-FEBAE4012041}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

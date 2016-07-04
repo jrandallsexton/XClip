@@ -12,10 +12,11 @@ namespace XClip.Api.Controllers
     public class TagController : ApiController
     {
         [HttpGet]
-        [Route]
-        public IHttpActionResult Get()
+        [Route("{userId:int}/{collectionId:int}")]
+        public IHttpActionResult Get(int userId, int collectionId)
         {
-            return Ok(new TagManager().GetTags().Select(kvp => new tag(kvp.Key.ToString(), kvp.Value)).ToList());
+            var collId = collectionId > 0 ? collectionId : (int?) null;
+            return Ok(new TagManager().GetTags(userId, collId).Select(kvp => new tag(kvp.Key.ToString(), kvp.Value)).ToList());
         }
 
         [HttpGet]
@@ -28,6 +29,17 @@ namespace XClip.Api.Controllers
                 return BadRequest("Invalid MediaId");
 
             return Ok(new TagManager().GetTags(uId).Select(kvp => new tag(kvp.Key.ToString(), kvp.Value)).ToList());
+        }
+
+        [HttpPost]
+        [Route]
+        public IHttpActionResult Post(string newTag)
+        {
+            if (string.IsNullOrEmpty(newTag))
+                return BadRequest("Tag cannot be empty");
+
+            return Ok("Created");
+            // if the tag already exists - do i return a bad request or just the id of the existing one?
         }
     }
 }

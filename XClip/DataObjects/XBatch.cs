@@ -6,7 +6,10 @@ namespace XClip.DataObjects
 {
     public class XBatch
     {
-        public Guid Id { get; set; }
+
+        public int Id { get; set; }
+
+        public Guid UId { get; set; }
 
         public Guid SrcId { get; set; }
 
@@ -32,7 +35,7 @@ namespace XClip.DataObjects
 
         public XBatch()
         {
-            this.Id = Guid.NewGuid();
+            this.UId = Guid.NewGuid();
             this.Items = new List<XBatchItem>();
         }
 

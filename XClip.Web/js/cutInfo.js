@@ -12,7 +12,8 @@ var _tagsClipIds = [];
 
 var cuts = [];
 var tagIdxVal = [];
-var _collectionId = 1;
+var _userId = 1;
+var _collectionId = 2;
 
 function initHtml() {
 
@@ -20,7 +21,7 @@ function initHtml() {
 
         _mediaSource = new mediaSource(data);
         _batch = new batch();
-        _batch.sourceId = _mediaSource.id;
+        _batch.sourceId = _mediaSource.uId;
 
         initVideoPlayer(_mediaSource, function() {
 
@@ -32,7 +33,7 @@ function initHtml() {
 
             $( '#fname').html( _mediaSource.fName );
 
-            apiWrapper.getTags(function(data) {
+            apiWrapper.getTags(_userId, _collectionId, function(data) {
 
                 _tags = data;
                 tagIdxVal = [];
@@ -65,6 +66,7 @@ function initHtml() {
                     if ((e.added != null) && (e.added != undefined)) {
                         // was it a new value?  if e.added.id is not an integer, it is text: that means a new tag
                         //if (isNaN(e.added.id)) { alert('new tag'); }
+                        debugger;
                         _tagsVidIds.push(e.added.id);
                     }
                 });
@@ -78,7 +80,8 @@ function initHtml() {
 
 function initVideoPlayer(mediaSource, callback) {
     var html = [];
-    html.push('<source src="mediaSources/1/' + _mediaSource.uId + _mediaSource.fExt + '" type="' + _mediaSource.mimeType + '">');
+
+    html.push('<source src="mediaSources/' + _collectionId + '/' + _mediaSource.uId + _mediaSource.fExt + '" type="' + _mediaSource.mimeType + '">');
     $( "#videoPlayer" ).html( html.join('') );
 
     videoPlayer = document.getElementById('videoPlayer');
@@ -93,31 +96,46 @@ function initVideoPlayer(mediaSource, callback) {
 
 function getNewVideo() {
 
-	_batchSrc = loadVideo();
+	apiWrapper.getRandomMedia(_collectionId, function(data) {
+		_batchSrc = data;
 
-	_batch = newBatch( _batchSrc.id );
-	_tagIds = new Array();
+		_batch = new batch(_batchSrc);
+		_tagIds = new Array();
 
-	var html = [];
-	html.push('<source src="mediaSources/' + _batchSrc.fName + '" type="' + _batchSrc.mimeType + '">');
-	$( videoPlayer ).html( html.join('') );
+		var html = [];
+		html.push('<source src="mediaSources/2/' + _batchSrc.uId + _batchSrc.fExt + '" type="' + _batchSrc.mimeType + '">');
+		$( videoPlayer ).html( html.join('') );
 
-	// http://stackoverflow.com/questions/14799172/how-to-change-source-in-html5-video-with-jquery
-	$( videoPlayer ).load();
+		// http://stackoverflow.com/questions/14799172/how-to-change-source-in-html5-video-with-jquery
+		$( videoPlayer ).load();
 
-	$( '#fname').html( _batchSrc.fName );
+		$( '#fname').html( _batchSrc.fName );
 
-	$( '#in' ).val( null );
-	$( '#out' ).val( null );
+		$( '#in' ).val( null );
+		$( '#out' ).val( null );
 
-	$( '#lstCuts' ).html( '' );
+		$( '#lstCuts' ).html( '' );
 
-	loadTags( 'itemTags' );
+		apiWrapper.getVideoTags(_mediaSource.uId, function(data) {
 
-	$("#vidTag").select2({tags:["red", "green", "blue"]});
+			$("#vidTag").select2(
+				{
+					tags: _tags,
+					dropdownCssClass: "bigdrop"
+				}
+			).on("change", function(e) {
+				if ((e.added != null) && (e.added != undefined)) {
+					// was it a new value?  if e.added.id is not an integer, it is text: that means a new tag
+					//if (isNaN(e.added.id)) { alert('new tag'); }
+					debugger;
+					_tagsVidIds.push(e.added.id);
+				}
+			});
+			$('#vidTag').select2('data', data);
+		});
 
-	$( ".chk" ).on( "click", function() { onTagCheckChanged(this); });
-
+		//$( ".chk" ).on( "click", function() { onTagCheckChanged(this); });
+	});
 }
 
 function onTagCheckChanged(sender) {
@@ -189,13 +207,14 @@ function onSeekEnd() { $( ".ctl" ).show(); }
 function onSetStart() {
     $( '#in' ).val( videoPlayer.currentTime );
 }
+
 function onSetEnd() {
     $( '#out' ).val( videoPlayer.currentTime );
 }
 
 function addBatchItem() {
 
-    var batchItem = new batchItem();
+    var batchItem = new BatchItem(null);
 	batchItem.id = NULL_GUID;
 	batchItem.index = _batch.items.length;
 	batchItem.start = $( '#in' ).val();
@@ -208,7 +227,8 @@ function addBatchItem() {
 	var index = _batch.items.length;
 
 	var tmp = (index + 1) + '. ' + batchItem.start + ' --> ' + batchItem.stop;
-	tmp += ' : Tags --> ';
+
+	if (batchItem.tags.length > 0) { tmp += ' : Tags --> '; }
 
 	$.each(batchItem.tags, function(index, item) { tmp += tagIdxVal[item] + ' '; });
 
@@ -222,14 +242,16 @@ function addBatchItem() {
 }
 
 function saveBatch() {
-
-	if ( apiWrapper.batchSave( _batch ) ) {
-		getNewVideo();
-	}
-	else {
-		alert('failed');
-	}
-
+	apiWrapper.batchSave(_batch, function(result) {
+		if (result) {
+			bootbox.alert("Batch saved successfully.<br/>The next video will now load.", function() {
+				getNewVideo();
+			});
+		}
+		else {
+			alert('save error');
+		}
+	});
 }
 
 function skipSource() {

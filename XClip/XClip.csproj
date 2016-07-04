@@ -59,6 +59,8 @@
     <Compile Include="DataObjects\XBatchItem.cs" />
     <Compile Include="DataObjects\XCollection.cs" />
     <Compile Include="DataObjects\XSource.cs" />
+    <Compile Include="DataObjects\XVideo.cs" />
+    <Compile Include="DataObjects\XVideoItem.cs" />
     <Compile Include="FileExtensions.cs" />
     <Compile Include="MimeTypes.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

@@ -24,21 +24,21 @@ var apiWrapper = new function () {
         return this.ajaxGet(this.rootPath + '/tags?mediaId=' + mediaId, callback, true);
     }
 
-    this.getTags = function(callback) {
-        return this.ajaxGet(this.rootPath + 'tags', callback, true);
+    this.getTags = function(userId, collectionId, callback) {
+        return this.ajaxGet(this.rootPath + 'tags/' + userId + '/' + collectionId, callback, true);
     };
 
     this.skipMediaSource = function(mediaId, callback) {
-        return this.ajaxPut(this.rootPath + 'media/' + mediaId, null, callback, true);
+        return this.ajaxPut(this.rootPath + 'media/' + mediaId + '/skip', null, true, callback);
     };
     
     this.mediaSourceDelete = function(mediaId, callback) {
-        
+        return this.ajaxPut(this.rootPath + 'media/' + mediaId + '/delete', null, true, callback);
     };
     
-    function batchSave(batch) {
-        return ajaxPost(URL_REST_SVC + '/batch', JSON.stringify(batch));
-    }
+    this.batchSave = function(batch, callback) {
+        return this.ajaxPost(this.rootPath + 'batches', batch, true, callback);
+    };
 
     this.getSkills = function(personId, callback) {
         var url = this.rootPath + "api/person/" + personId + "/skill"

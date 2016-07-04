@@ -19,7 +19,7 @@ namespace XClip.DataObjects
 
         public XSource()
         {
-            
+            this.UId = Guid.NewGuid();
         }
 
         public XSource(string fName, string fExt, long fSize, DateTime fDate)

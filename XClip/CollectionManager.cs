@@ -37,13 +37,12 @@ namespace XClip
             _collectionRepository.Delete(id, userId);
         }
 
-        public void AddToCollection(int collectionId, XSource source, bool moveFiles)
+        public void AddToCollection(int collectionId, XSource source, bool moveFiles, int userId)
         {
             var id = _sourceManager.Save(collectionId, source);
-            var uId = _sourceManager.UId(collectionId, id);
 
             // auto-generate some tags based on the filename (if any words are found within the title)
-            this.AutoTag(id, source.Filename);
+            this.AutoTag(id, source.Filename, userId, collectionId);
 
             if (!moveFiles)
                 return;
@@ -60,14 +59,14 @@ namespace XClip
                 Directory.CreateDirectory(target);
 
             var srcPath = Path.Combine(config.DirectoryIn, $"{source.Filename}{source.FileExt}");
-            var tgtPath = Path.Combine(target, $"{uId}{source.FileExt}");
+            var tgtPath = Path.Combine(target, $"{source.UId}{source.FileExt}");
 
             File.Move(srcPath, tgtPath);
         }
 
-        private void AutoTag(int fileId, string fileName)
+        private void AutoTag(int fileId, string fileName, int userId, int collectionId)
         {
-            var tags = _tagManager.GetTags();
+            var tags = _tagManager.GetTags(userId, collectionId);
             var existingTags = tags.Values.ToList();
 
             // http://stackoverflow.com/questions/2159026/regex-how-to-get-words-from-a-string-c
@@ -115,7 +114,7 @@ namespace XClip
             });
 
             // associate the new file with the tags
-            var tagDictionary = _tagManager.GetTags();
+            var tagDictionary = _tagManager.GetTags(userId, collectionId);
 
             foreach (var kvp in tagDictionary)
             {

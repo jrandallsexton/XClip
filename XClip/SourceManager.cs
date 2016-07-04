@@ -25,6 +25,11 @@ namespace XClip
             _sourceRepository.MarkAsSkipped(uId);
         }
 
+        public void MarkAsDeleted(Guid uId)
+        {
+            _sourceRepository.MarkAsDeleted(uId);
+        }
+
         public XSource Get(Guid uId)
         {
             return _sourceRepository.Get(uId);

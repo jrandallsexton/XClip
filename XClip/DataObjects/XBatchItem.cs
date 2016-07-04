@@ -8,7 +8,9 @@ namespace XClip.DataObjects
 {
     public class XBatchItem
     {
-        public Guid Id { get; set; }
+        public int Id { get; set; }
+
+        public Guid UId { get; set; }
 
         public int Index { get; set; }
 
@@ -20,7 +22,7 @@ namespace XClip.DataObjects
 
         public List<int> Tags { get; set; }
 
-        public XBatchItem() { this.Id = Guid.NewGuid(); }
+        public XBatchItem() { this.UId = Guid.NewGuid(); }
 
         public XBatchItem(int idx, string start, string stop, string duration, List<int> tagIds) : this()
         {

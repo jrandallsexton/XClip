@@ -36,13 +36,14 @@ namespace XClip.Repositories
 
             var paramList2 = new List<SqlParameter>
             {
+                new SqlParameter("UId", source.UId),
                 new SqlParameter("CollectionId", collectionId),
                 new SqlParameter("Filename", source.Filename),
                 new SqlParameter("FileExt", source.FileExt),
                 new SqlParameter("FileSize", source.FileSize),
                 new SqlParameter("FileDate", source.FileDate)
             };
-            const string sql = "INSERT INTO [BatchSources] ([CollectionId], [Filename], [FileExt], [Filesize], [Filedate]) VALUES (@CollectionId, @Filename, @FileExt, @FileSize, @FileDate) SELECT SCOPE_IDENTITY()";
+            const string sql = "INSERT INTO [BatchSources] ([UId], [CollectionId], [Filename], [FileExt], [Filesize], [Filedate]) VALUES (@UId, @CollectionId, @Filename, @FileExt, @FileSize, @FileDate) SELECT SCOPE_IDENTITY()";
 
             return base.ExecuteIdentity(sql, paramList2);
         }
@@ -61,7 +62,17 @@ namespace XClip.Repositories
 
         public void MarkAsSkipped(Guid sourceId)
         {
-            const string sql = "UPDATE [BatchSources] SET [Skipped] = @GetUtcDate() WHERE [UId] = @UId";
+            const string sql = "UPDATE [BatchSources] SET [Skipped] = GetUtcDate() WHERE [UId] = @UId";
+            var paramList = new List<SqlParameter>
+            {
+                new SqlParameter("UId", sourceId)
+            };
+            base.ExecuteInLineSql(sql, paramList);
+        }
+
+        public void MarkAsDeleted(Guid sourceId)
+        {
+            const string sql = "UPDATE [BatchSources] SET [Deleted] = GetUtcDate() WHERE [UId] = @UId";
             var paramList = new List<SqlParameter>
             {
                 new SqlParameter("UId", sourceId)

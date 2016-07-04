@@ -34,6 +34,7 @@ namespace XClip.Tests
         [Test]
         public void LoadSourceMediaUsingCollectionManager()
         {
+            const int userId = 1;
             const int collectionId = 1;
             var mgr = new CollectionManager();
 
@@ -47,7 +48,7 @@ namespace XClip.Tests
                                    select new XSource(fi.Name, fi.Extension, fi.Length, fi.CreationTime))
             {
                 source.Filename = source.Filename.Replace(source.FileExt, string.Empty);
-                mgr.AddToCollection(collectionId, source, true);
+                mgr.AddToCollection(collectionId, source, true, userId);
                 idx++;
                 if (idx == 10)
                     break;

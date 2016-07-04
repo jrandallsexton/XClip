@@ -12,9 +12,9 @@ namespace XClip
 
         private TagRepository _tagRepository = new TagRepository();
 
-        public Dictionary<int, string> GetTags()
+        public Dictionary<int, string> GetTags(int userId, int? collectionId)
         {
-            return _tagRepository.Tags();
+            return _tagRepository.Tags(userId, collectionId);
         }
 
         public IEnumerable<string> GetBlacklist()
