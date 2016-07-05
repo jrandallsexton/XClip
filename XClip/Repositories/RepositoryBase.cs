@@ -152,5 +152,45 @@ namespace XClip.Repositories
             }
 
         }
+
+        public SqlDataReader OpenDataReaderInLine(string sqlStatement, List<SqlParameter> paramList)
+        {
+
+            SqlConnection cnnSql = null;
+            SqlCommand cmdSql = null;
+
+            var logId = -1;
+
+            try
+            {
+
+                cnnSql = new SqlConnection(this.ConnectionString);
+
+                cmdSql = new SqlCommand(sqlStatement, cnnSql)
+                {
+                    CommandTimeout = 30000,
+                    CommandType = CommandType.Text
+                };
+
+                foreach (var p in paramList)
+                {
+                    cmdSql.Parameters.Add(p);
+                }
+
+                cnnSql.Open();
+
+                var drdSql = cmdSql.ExecuteReader(CommandBehavior.CloseConnection);
+
+                return drdSql;
+
+            }
+            catch (Exception)
+            {
+                if (cnnSql != null) cnnSql.Dispose();
+                if (cmdSql != null) cmdSql.Dispose();
+                throw;
+            }
+
+        }
     }
 }

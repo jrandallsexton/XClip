@@ -110,7 +110,7 @@ namespace XClip
             // save the new tags
             newTags.ForEach(x =>
             {
-                _tagManager.Save(x);
+                _tagManager.Save(userId, collectionId, x);
             });
 
             // associate the new file with the tags

@@ -95,13 +95,27 @@ namespace XClip.Repositories
             return values;
         }
 
-        public int Save(string tagText)
+        public int Save(int userId, int? collectionId, string tagText)
         {
-            const string sql = "INSERT INTO [Tags] ([Text]) VALUES (@Tag) SELECT SCOPE_IDENTITY()";
+
             var paramList = new List<SqlParameter>
             {
+                new SqlParameter("UserId", userId),
                 new SqlParameter("Tag", tagText)
             };
+
+            var sql = string.Empty;
+
+            if (collectionId.HasValue)
+            {
+                sql = "INSERT INTO [Tags] ([UserId], [CollectionId], [Text]) VALUES (@UserId, @CollectionId, @Tag) SELECT SCOPE_IDENTITY()";
+                paramList.Add(new SqlParameter("CollectionId", collectionId.Value));
+            }
+            else
+            {
+                sql = "INSERT INTO [Tags] ([UserId], [Text]) VALUES (@UserId, @Tag) SELECT SCOPE_IDENTITY()";
+            }
+
             return base.ExecuteIdentity(sql, paramList);
         }
 

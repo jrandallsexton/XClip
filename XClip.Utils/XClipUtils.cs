@@ -88,13 +88,16 @@ namespace XClip.Utils
 
         public void LoadTagsFromExternalSource()
         {
+            const int userId = 1;
+            const int collectionId = 1;
+
             var lines = File.ReadAllLines(@"f:\tags.txt");
 
             var tm = new TagManager();
 
             foreach (var line in lines.Where(line => !string.IsNullOrEmpty(line)))
             {
-                tm.Save(line.Trim());
+                tm.Save(userId, collectionId, line.Trim());
             }
         }
 

@@ -22,9 +22,9 @@ namespace XClip
             return _tagRepository.GetBlacklist();
         } 
 
-        public int Save(string tagText)
+        public int Save(int userId, int? collectionId, string tagText)
         {
-            return _tagRepository.Save(tagText);
+            return _tagRepository.Save(userId, collectionId, tagText);
         }
 
         public void AddTag(int sourceId, int tagId)

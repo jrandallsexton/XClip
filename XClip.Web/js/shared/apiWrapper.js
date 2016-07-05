@@ -40,6 +40,10 @@ var apiWrapper = new function () {
         return this.ajaxPost(this.rootPath + 'batches', batch, true, callback);
     };
 
+    this.tagSave = function(tagCreationModel, callback) {
+        return this.ajaxPost(this.rootPath + 'tags', tagCreationModel, true, callback);
+    };
+
     this.getSkills = function(personId, callback) {
         var url = this.rootPath + "api/person/" + personId + "/skill"
         this.ajaxGet(url, function (values) {

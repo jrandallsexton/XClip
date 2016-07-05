@@ -58,6 +58,7 @@
     <Compile Include="SourceManagerTests.cs" />
     <Compile Include="TestResult.cs" />
     <Compile Include="TimeKeeper.cs" />
+    <Compile Include="XVideoManagerTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

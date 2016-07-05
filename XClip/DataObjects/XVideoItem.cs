@@ -14,7 +14,7 @@ namespace XClip.DataObjects
 
         public int Index { get; set; }
 
-        public Guid XBatchItemId { get; set; }
+        public int XBatchItemId { get; set; }
 
     }
     

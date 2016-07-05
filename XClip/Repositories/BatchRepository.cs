@@ -26,22 +26,6 @@ namespace XClip.Repositories
 
         }
 
-        //public bool Save(string fName, string fExt, long fileSize, DateTime created)
-        //{
-        //    const string sql = "INSERT INTO [BatchSources] ([Filename], [FileExt], [Filesize], [Filedate]) VALUES (@Fname, @FExt, @FSize, @FDate)";
-
-        //    var paramList = new List<SqlParameter>
-        //    {
-        //        new SqlParameter("@Fname", fName),
-        //        new SqlParameter("@FExt", fExt),
-        //        new SqlParameter("@FSize", fileSize),
-        //        new SqlParameter("@FDate", created)
-        //    };
-
-        //    return base.ExecuteInLineSql(sql, paramList);
-
-        //}
-
         public XSource RandomSource(int collectionId)
         {
             var sb = new StringBuilder();
@@ -154,7 +138,7 @@ namespace XClip.Repositories
 
         public void MarkStarted(Guid batchUId)
         {
-            var sql = "UPDATE dbo.[Batches] SET [ProcStart] = GetUtcDate() WHERE [UId] = @UId";
+            const string sql = "UPDATE dbo.[Batches] SET [ProcStart] = GetUtcDate() WHERE [UId] = @UId";
             var paramList = new List<SqlParameter>
             {
                 new SqlParameter("@UId", batchUId)
@@ -165,14 +149,21 @@ namespace XClip.Repositories
 
         public void MarkCompleted(Guid batchUId, DateTime end)
         {
-            var sql = "UPDATE dbo.[Batches] SET [ProcEnd] = @End, [Completed] = GetUtcDate() WHERE [UId] = @UId";
+            var sql = new StringBuilder();
+            sql.AppendLine("BEGIN TRANSACTION");
+            sql.AppendLine("DECLARE @BatchId int");
+            sql.AppendLine("SELECT @BatchId FROM dbo.[Batches] B WHERE B.[UId] = @UId");
+            sql.AppendLine("UPDATE dbo.[BatchItems] SET [Completed] = GetUtcDate() WHERE [BatchId] = @BatchId");
+            sql.AppendLine("UPDATE dbo.[Batches] SET [ProcEnd] = @End, [Completed] = GetUtcDate() WHERE [UId] = @UId");
+            sql.AppendLine("COMMIT TRANSACTION");
+
             var paramList = new List<SqlParameter>
             {
                 new SqlParameter("@End", end),
                 new SqlParameter("@UId", batchUId)
             };
 
-            base.ExecuteInLineSql(sql, paramList);
+            base.ExecuteInLineSql(sql.ToString(), paramList);
         }
 
         public bool MarkSourceAsReviewed(Guid id)
@@ -266,13 +257,13 @@ namespace XClip.Repositories
 
         public void BatchStart(Guid id)
         {
-            var sql = string.Format("UPDATE [Batches] SET [ProcStart] = GetDate() WHERE [Id] = '{0}'", id);
+            var sql = $"UPDATE [Batches] SET [ProcStart] = GetDate() WHERE [Id] = '{id}'";
             base.ExecuteInLineSql(sql, new List<SqlParameter>());
         }
 
         public void BatchEnd(Guid id)
         {
-            var sql = string.Format("UPDATE [Batches] SET [Completed] = GetDate(), [ProcEnd] = GetDate() WHERE [Id] = '{0}'", id);
+            var sql = $"UPDATE [Batches] SET [Completed] = GetDate(), [ProcEnd] = GetDate() WHERE [Id] = '{id}'";
             base.ExecuteInLineSql(sql, new List<SqlParameter>());
         }
 

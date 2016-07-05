@@ -69,8 +69,11 @@
     <Compile Include="Repositories\RepositoryBase.cs" />
     <Compile Include="Repositories\SourceRepository.cs" />
     <Compile Include="Repositories\TagRepository.cs" />
+    <Compile Include="Repositories\XVideoItemRepository.cs" />
+    <Compile Include="Repositories\XVideoRepository.cs" />
     <Compile Include="SourceManager.cs" />
     <Compile Include="TagManager.cs" />
+    <Compile Include="XVideoManager.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

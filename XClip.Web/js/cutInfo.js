@@ -48,8 +48,15 @@ function initHtml() {
                 ).on("change", function(e) {
                     if ((e.added != null) && (e.added != undefined)) {
                         // was it a new value?  if e.added.id is not an integer, it is text: that means a new tag
-                        //if (isNaN(e.added.id)) { alert('new tag'); }
-                        _tagsClipIds.push(e.added.id);
+                        if (isNaN(e.added.id)) {
+							apiWrapper.tagSave(e.added.id, function(result) {
+								debugger;
+								_tagsClipIds.push(result);
+							});
+						}
+						else {
+							_tagsClipIds.push(e.added.id);
+						}
                     }
                 });
 
@@ -64,10 +71,16 @@ function initHtml() {
                 }
                 ).on("change", function(e) {
                     if ((e.added != null) && (e.added != undefined)) {
-                        // was it a new value?  if e.added.id is not an integer, it is text: that means a new tag
-                        //if (isNaN(e.added.id)) { alert('new tag'); }
-                        debugger;
-                        _tagsVidIds.push(e.added.id);
+						// was it a new value?  if e.added.id is not an integer, it is text: that means a new tag
+						if (isNaN(e.added.id)) {
+							var tagCreationModel = new TagCreationModel(_userId, _collectionId, e.added.id);
+							apiWrapper.tagSave(tagCreationModel, function(result) {
+								_tagsVidIds.push(result);
+							});
+						}
+						else {
+							_tagsVidIds.push(e.added.id);
+						}
                     }
                 });
                 $('#vidTag').select2('data', data);
