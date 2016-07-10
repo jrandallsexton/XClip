@@ -18,31 +18,42 @@ namespace XClip.Api.Controllers
         {
 
             // get the mediaSource
-            
-            var batchItems = new List<XBatchItem>();
-            foreach (var x in batch.items)
-            {
-                batchItems.Add(new XBatchItem()
-                {
-                    Tags = new List<int>(),
-                    Duration = string.Empty,
-                    Index = x.index,
-                    Start = x.start,
-                    Stop = x.stop
-                });    
-            }
-
             var source = new SourceManager().Get(batch.sourceId);
 
             var newBatch = new XBatch
             {
                 Filename = source.Filename,
                 InputDir = string.Empty,
-                Items = batchItems,
+                Items = new List<XBatchItem>(),
                 OutputDir = string.Empty,
                 OutputMask = string.Empty,
                 SrcId = batch.sourceId
             };
+
+            var batchItems = new List<XBatchItem>();
+            foreach (var x in batch.items)
+            {
+                var bi = new XBatchItem()
+                {
+                    Tags = new List<int>(),
+                    Duration = string.Empty,
+                    Index = x.index,
+                    Start = x.start,
+                    Stop = x.stop
+                };
+
+                x.tags.ForEach(y =>
+                {
+                    bi.Tags.Add(y);
+                });
+
+                batch.tags.ForEach(z =>
+                {
+                    bi.Tags.Add(z);
+                });
+
+                newBatch.Items.Add(bi);
+            }
 
             var created = new BatchManager().Save(newBatch);
 

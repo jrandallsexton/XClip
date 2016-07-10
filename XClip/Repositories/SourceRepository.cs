@@ -14,7 +14,7 @@ namespace XClip.Repositories
 {
     public class SourceRepository : RepositoryBase
     {
-        private IDbConnection _db = new SqlConnection(ConfigurationManager.ConnectionStrings["xclipDb"].ConnectionString);
+        private readonly IDbConnection _db = new SqlConnection(ConfigurationManager.ConnectionStrings["xclipDb"].ConnectionString);
 
         public int Save(int collectionId, XSource source)
         {
@@ -50,34 +50,31 @@ namespace XClip.Repositories
 
         public Guid UId(int collectionId, int sourceId)
         {
-            const string sql = "SELECT [UId] FROM [BatchSources] WHERE [Id] = @Id AND [CollectionId] = @CollectionId";
             var paramList = new List<SqlParameter>
             {
                 new SqlParameter("CollectionId", collectionId),
                 new SqlParameter("Id", sourceId)
             };
 
-            return new SqlBaseDal().ExecuteScalarGuidInLine(sql, paramList);
+            return new SqlBaseDal().ExecuteScalarGuidInLine(Queries.XSourceGetUId, paramList);
         }
 
         public void MarkAsSkipped(Guid sourceId)
         {
-            const string sql = "UPDATE [BatchSources] SET [Skipped] = GetUtcDate() WHERE [UId] = @UId";
             var paramList = new List<SqlParameter>
             {
                 new SqlParameter("UId", sourceId)
             };
-            base.ExecuteInLineSql(sql, paramList);
+            base.ExecuteInLineSql(Queries.XSourceMarkSkipped, paramList);
         }
 
         public void MarkAsDeleted(Guid sourceId)
         {
-            const string sql = "UPDATE [BatchSources] SET [Deleted] = GetUtcDate() WHERE [UId] = @UId";
             var paramList = new List<SqlParameter>
             {
                 new SqlParameter("UId", sourceId)
             };
-            base.ExecuteInLineSql(sql, paramList);
+            base.ExecuteInLineSql(Queries.XSourceMarkDeleted, paramList);
         }
 
         public XSource Get(Guid uId)

@@ -66,6 +66,11 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repositories\BatchRepository.cs" />
     <Compile Include="Repositories\CollectionRepository.cs" />
+    <Compile Include="Repositories\Queries.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Queries.resx</DependentUpon>
+    </Compile>
     <Compile Include="Repositories\RepositoryBase.cs" />
     <Compile Include="Repositories\SourceRepository.cs" />
     <Compile Include="Repositories\TagRepository.cs" />
@@ -77,6 +82,12 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Repositories\Queries.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Queries.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

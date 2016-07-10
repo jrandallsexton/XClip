@@ -9,7 +9,13 @@ using XClip.DataObjects;
 
 namespace XClip.Repositories
 {
-    public class XVideoItemRepository : RepositoryBase
+    public interface IXVideoItemRepository
+    {
+        void Save(int videoId, XVideoItem item);
+        List<XVideoItem> GetVideoItems(int xVideoId);
+    }
+
+    public class XVideoItemRepository : RepositoryBase, IXVideoItemRepository
     {
         public void Save(int videoId, XVideoItem item)
         {

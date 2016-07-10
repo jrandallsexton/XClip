@@ -2,17 +2,11 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="0a4fb62d-2588-4fdd-81db-e59aa3674947" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/js/models/tagCreationModel.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../XClip.Api/Controllers/TagController.cs" afterPath="$PROJECT_DIR$/../XClip.Api/Controllers/TagController.cs" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../XClip.Tests/XClip.Tests.csproj" afterPath="$PROJECT_DIR$/../XClip.Tests/XClip.Tests.csproj" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/js/viewModels/videoPlayerVM.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../XClip.Api/Models/batch.cs" afterPath="$PROJECT_DIR$/../XClip.Api/Models/batch.cs" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/cutInfo.html" afterPath="$PROJECT_DIR$/cutInfo.html" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/js/cutInfo.js" afterPath="$PROJECT_DIR$/js/cutInfo.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/js/shared/apiWrapper.js" afterPath="$PROJECT_DIR$/js/shared/apiWrapper.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../XClip/DataObjects/XVideoItem.cs" afterPath="$PROJECT_DIR$/../XClip/DataObjects/XVideoItem.cs" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../XClip/Repositories/BatchRepository.cs" afterPath="$PROJECT_DIR$/../XClip/Repositories/BatchRepository.cs" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../XClip/Repositories/RepositoryBase.cs" afterPath="$PROJECT_DIR$/../XClip/Repositories/RepositoryBase.cs" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../XClip/XClip.csproj" afterPath="$PROJECT_DIR$/../XClip/XClip.csproj" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/js/models/batch.js" afterPath="$PROJECT_DIR$/js/models/batch.js" />
     </list>
     <ignored path="XClip.Web.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -33,34 +27,48 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
+      <file leaf-file-name="batchItem.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/js/models/batchItem.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="68">
+              <caret line="4" column="25" selection-start-line="4" selection-start-column="25" selection-end-line="4" selection-end-column="25" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
       <file leaf-file-name="cutInfo.js" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/js/cutInfo.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="306">
-              <caret line="70" column="17" selection-start-line="70" selection-start-column="17" selection-end-line="70" selection-end-column="17" />
+            <state relative-caret-position="192">
+              <caret line="112" column="28" selection-start-line="112" selection-start-column="28" selection-end-line="112" selection-end-column="28" />
               <folding>
-                <element signature="e#589#745#0" expanded="false" />
-                <element signature="n#!!block;n#getNewVideo#0" expanded="false" />
-                <element signature="e#3185#4263#0" expanded="false" />
-                <element signature="e#3756#4186#0" expanded="false" />
-                <element signature="e#3788#3846#0" expanded="false" />
-                <element signature="e#3877#4141#0" expanded="false" />
-                <element signature="e#3932#4136#0" expanded="false" />
-                <element signature="e#3939#4028#0" expanded="false" />
+                <element signature="e#873#1709#0" expanded="false" />
+                <element signature="n#!!block;n#initVideoPlayer#0" expanded="false" />
                 <element signature="n#!!block;n#onTagCheckChanged#0" expanded="false" />
-                <element signature="e#4337#4560#0" expanded="false" />
+                <element signature="e#4352#4575#0" expanded="false" />
                 <element signature="n#!!block;n#loadTags#0" expanded="false" />
-                <element signature="e#4750#5217#0" expanded="false" />
-                <element signature="e#4804#4929#0" expanded="false" />
-                <element signature="e#4956#5084#0" expanded="false" />
-                <element signature="e#5092#5213#0" expanded="false" />
+                <element signature="e#4765#5232#0" expanded="false" />
+                <element signature="e#4819#4944#0" expanded="false" />
+                <element signature="e#4971#5099#0" expanded="false" />
+                <element signature="e#5107#5228#0" expanded="false" />
                 <element signature="n#!!block;n#onPlayPause#0" expanded="false" />
-                <element signature="e#5425#5537#0" expanded="false" />
-                <element signature="e#5544#5655#0" expanded="false" />
                 <element signature="n#!!block;n#onSetStart#0" expanded="false" />
                 <element signature="n#!!block;n#onSetEnd#0" expanded="false" />
+                <element signature="n#!!block;n#skipSource#0" expanded="false" />
+                <element signature="n#!!block;n#deleteSource#0" expanded="false" />
                 <element signature="n#!!block;n#setPlayerPos#0" expanded="false" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="videoPlayerVM.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/js/viewModels/videoPlayerVM.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="17">
+              <caret line="1" column="2" selection-start-line="1" selection-start-column="2" selection-end-line="1" selection-end-column="2" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -87,18 +95,8 @@
       <file leaf-file-name="batch.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/js/models/batch.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="136">
-              <caret line="8" column="2" selection-start-line="8" selection-start-column="2" selection-end-line="8" selection-end-column="2" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="tagCreationModel.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/js/models/tagCreationModel.js">
-          <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="0">
-              <caret line="0" column="5" selection-start-line="0" selection-start-column="5" selection-end-line="0" selection-end-column="5" />
+              <caret line="0" column="25" selection-start-line="0" selection-start-column="25" selection-end-line="0" selection-end-column="25" />
               <folding />
             </state>
           </provider>
@@ -202,7 +200,6 @@
         <option value="$PROJECT_DIR$/js/models/mediaSource.js" />
         <option value="$PROJECT_DIR$/js/cutInfoWebApi.js" />
         <option value="$PROJECT_DIR$/js/models/batchItem.js" />
-        <option value="$PROJECT_DIR$/js/models/batch.js" />
         <option value="$PROJECT_DIR$/js/apiWrapper.js" />
         <option value="$PROJECT_DIR$/js/models/XVideoModel.js" />
         <option value="$PROJECT_DIR$/js/viewModels/XVideoViewModel.js" />
@@ -214,6 +211,8 @@
         <option value="$PROJECT_DIR$/js/shared/apiWrapper.js" />
         <option value="$PROJECT_DIR$/cutInfo.html" />
         <option value="$PROJECT_DIR$/js/models/tagCreationModel.js" />
+        <option value="$PROJECT_DIR$/js/viewModels/videoPlayerVM.js" />
+        <option value="$PROJECT_DIR$/js/models/batch.js" />
         <option value="$PROJECT_DIR$/js/cutInfo.js" />
       </list>
     </option>
@@ -436,15 +435,15 @@
       <workItem from="1463379166106" duration="655000" />
       <workItem from="1466532508425" duration="776000" />
       <workItem from="1467475695493" duration="3055000" />
-      <workItem from="1467547000887" duration="9986000" />
+      <workItem from="1467547000887" duration="13058000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="46857000" />
+    <option name="totallyTimeSpent" value="49929000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
+    <frame x="-8" y="-8" width="1936" height="1056" extended-state="7" />
     <editor active="true" />
     <layout>
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.17239584" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
@@ -478,19 +477,11 @@
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
-      <option name="time" value="15" />
+      <option name="time" value="16" />
     </breakpoint-manager>
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/js/constants.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="49" selection-start-line="0" selection-start-column="49" selection-end-line="0" selection-end-column="49" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/js/models/batch.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="136">
@@ -579,26 +570,20 @@
         <state relative-caret-position="0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
-            <element signature="e#589#745#0" expanded="false" />
-            <element signature="n#!!block;n#getNewVideo#0" expanded="false" />
-            <element signature="e#3185#4263#0" expanded="false" />
-            <element signature="e#3756#4186#0" expanded="false" />
-            <element signature="e#3788#3846#0" expanded="false" />
-            <element signature="e#3877#4141#0" expanded="false" />
-            <element signature="e#3932#4136#0" expanded="false" />
-            <element signature="e#3939#4028#0" expanded="false" />
+            <element signature="e#873#1709#0" expanded="false" />
+            <element signature="n#!!block;n#initVideoPlayer#0" expanded="false" />
             <element signature="n#!!block;n#onTagCheckChanged#0" expanded="false" />
-            <element signature="e#4337#4560#0" expanded="false" />
+            <element signature="e#4352#4575#0" expanded="false" />
             <element signature="n#!!block;n#loadTags#0" expanded="false" />
-            <element signature="e#4750#5217#0" expanded="false" />
-            <element signature="e#4804#4929#0" expanded="false" />
-            <element signature="e#4956#5084#0" expanded="false" />
-            <element signature="e#5092#5213#0" expanded="false" />
+            <element signature="e#4765#5232#0" expanded="false" />
+            <element signature="e#4819#4944#0" expanded="false" />
+            <element signature="e#4971#5099#0" expanded="false" />
+            <element signature="e#5107#5228#0" expanded="false" />
             <element signature="n#!!block;n#onPlayPause#0" expanded="false" />
-            <element signature="e#5425#5537#0" expanded="false" />
-            <element signature="e#5544#5655#0" expanded="false" />
             <element signature="n#!!block;n#onSetStart#0" expanded="false" />
             <element signature="n#!!block;n#onSetEnd#0" expanded="false" />
+            <element signature="n#!!block;n#skipSource#0" expanded="false" />
+            <element signature="n#!!block;n#deleteSource#0" expanded="false" />
             <element signature="n#!!block;n#setPlayerPos#0" expanded="false" />
           </folding>
         </state>
@@ -777,26 +762,20 @@
         <state relative-caret-position="119">
           <caret line="7" column="14" selection-start-line="7" selection-start-column="14" selection-end-line="7" selection-end-column="14" />
           <folding>
-            <element signature="e#589#745#0" expanded="false" />
-            <element signature="n#!!block;n#getNewVideo#0" expanded="false" />
-            <element signature="e#3185#4263#0" expanded="false" />
-            <element signature="e#3756#4186#0" expanded="false" />
-            <element signature="e#3788#3846#0" expanded="false" />
-            <element signature="e#3877#4141#0" expanded="false" />
-            <element signature="e#3932#4136#0" expanded="false" />
-            <element signature="e#3939#4028#0" expanded="false" />
+            <element signature="e#873#1709#0" expanded="false" />
+            <element signature="n#!!block;n#initVideoPlayer#0" expanded="false" />
             <element signature="n#!!block;n#onTagCheckChanged#0" expanded="false" />
-            <element signature="e#4337#4560#0" expanded="false" />
+            <element signature="e#4352#4575#0" expanded="false" />
             <element signature="n#!!block;n#loadTags#0" expanded="false" />
-            <element signature="e#4750#5217#0" expanded="false" />
-            <element signature="e#4804#4929#0" expanded="false" />
-            <element signature="e#4956#5084#0" expanded="false" />
-            <element signature="e#5092#5213#0" expanded="false" />
+            <element signature="e#4765#5232#0" expanded="false" />
+            <element signature="e#4819#4944#0" expanded="false" />
+            <element signature="e#4971#5099#0" expanded="false" />
+            <element signature="e#5107#5228#0" expanded="false" />
             <element signature="n#!!block;n#onPlayPause#0" expanded="false" />
-            <element signature="e#5425#5537#0" expanded="false" />
-            <element signature="e#5544#5655#0" expanded="false" />
             <element signature="n#!!block;n#onSetStart#0" expanded="false" />
             <element signature="n#!!block;n#onSetEnd#0" expanded="false" />
+            <element signature="n#!!block;n#skipSource#0" expanded="false" />
+            <element signature="n#!!block;n#deleteSource#0" expanded="false" />
             <element signature="n#!!block;n#setPlayerPos#0" expanded="false" />
           </folding>
         </state>
@@ -1050,26 +1029,20 @@
         <state relative-caret-position="0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
-            <element signature="e#589#745#0" expanded="false" />
-            <element signature="n#!!block;n#getNewVideo#0" expanded="false" />
-            <element signature="e#3185#4263#0" expanded="false" />
-            <element signature="e#3756#4186#0" expanded="false" />
-            <element signature="e#3788#3846#0" expanded="false" />
-            <element signature="e#3877#4141#0" expanded="false" />
-            <element signature="e#3932#4136#0" expanded="false" />
-            <element signature="e#3939#4028#0" expanded="false" />
+            <element signature="e#873#1709#0" expanded="false" />
+            <element signature="n#!!block;n#initVideoPlayer#0" expanded="false" />
             <element signature="n#!!block;n#onTagCheckChanged#0" expanded="false" />
-            <element signature="e#4337#4560#0" expanded="false" />
+            <element signature="e#4352#4575#0" expanded="false" />
             <element signature="n#!!block;n#loadTags#0" expanded="false" />
-            <element signature="e#4750#5217#0" expanded="false" />
-            <element signature="e#4804#4929#0" expanded="false" />
-            <element signature="e#4956#5084#0" expanded="false" />
-            <element signature="e#5092#5213#0" expanded="false" />
+            <element signature="e#4765#5232#0" expanded="false" />
+            <element signature="e#4819#4944#0" expanded="false" />
+            <element signature="e#4971#5099#0" expanded="false" />
+            <element signature="e#5107#5228#0" expanded="false" />
             <element signature="n#!!block;n#onPlayPause#0" expanded="false" />
-            <element signature="e#5425#5537#0" expanded="false" />
-            <element signature="e#5544#5655#0" expanded="false" />
             <element signature="n#!!block;n#onSetStart#0" expanded="false" />
             <element signature="n#!!block;n#onSetEnd#0" expanded="false" />
+            <element signature="n#!!block;n#skipSource#0" expanded="false" />
+            <element signature="n#!!block;n#deleteSource#0" expanded="false" />
             <element signature="n#!!block;n#setPlayerPos#0" expanded="false" />
           </folding>
         </state>
@@ -1323,26 +1296,20 @@
         <state relative-caret-position="0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
-            <element signature="e#589#745#0" expanded="false" />
-            <element signature="n#!!block;n#getNewVideo#0" expanded="false" />
-            <element signature="e#3185#4263#0" expanded="false" />
-            <element signature="e#3756#4186#0" expanded="false" />
-            <element signature="e#3788#3846#0" expanded="false" />
-            <element signature="e#3877#4141#0" expanded="false" />
-            <element signature="e#3932#4136#0" expanded="false" />
-            <element signature="e#3939#4028#0" expanded="false" />
+            <element signature="e#873#1709#0" expanded="false" />
+            <element signature="n#!!block;n#initVideoPlayer#0" expanded="false" />
             <element signature="n#!!block;n#onTagCheckChanged#0" expanded="false" />
-            <element signature="e#4337#4560#0" expanded="false" />
+            <element signature="e#4352#4575#0" expanded="false" />
             <element signature="n#!!block;n#loadTags#0" expanded="false" />
-            <element signature="e#4750#5217#0" expanded="false" />
-            <element signature="e#4804#4929#0" expanded="false" />
-            <element signature="e#4956#5084#0" expanded="false" />
-            <element signature="e#5092#5213#0" expanded="false" />
+            <element signature="e#4765#5232#0" expanded="false" />
+            <element signature="e#4819#4944#0" expanded="false" />
+            <element signature="e#4971#5099#0" expanded="false" />
+            <element signature="e#5107#5228#0" expanded="false" />
             <element signature="n#!!block;n#onPlayPause#0" expanded="false" />
-            <element signature="e#5425#5537#0" expanded="false" />
-            <element signature="e#5544#5655#0" expanded="false" />
             <element signature="n#!!block;n#onSetStart#0" expanded="false" />
             <element signature="n#!!block;n#onSetEnd#0" expanded="false" />
+            <element signature="n#!!block;n#skipSource#0" expanded="false" />
+            <element signature="n#!!block;n#deleteSource#0" expanded="false" />
             <element signature="n#!!block;n#setPlayerPos#0" expanded="false" />
           </folding>
         </state>
@@ -1590,26 +1557,20 @@
         <state relative-caret-position="1802">
           <caret line="189" column="34" selection-start-line="189" selection-start-column="34" selection-end-line="189" selection-end-column="34" />
           <folding>
-            <element signature="e#589#745#0" expanded="false" />
-            <element signature="n#!!block;n#getNewVideo#0" expanded="false" />
-            <element signature="e#3185#4263#0" expanded="false" />
-            <element signature="e#3756#4186#0" expanded="false" />
-            <element signature="e#3788#3846#0" expanded="false" />
-            <element signature="e#3877#4141#0" expanded="false" />
-            <element signature="e#3932#4136#0" expanded="false" />
-            <element signature="e#3939#4028#0" expanded="false" />
+            <element signature="e#873#1709#0" expanded="false" />
+            <element signature="n#!!block;n#initVideoPlayer#0" expanded="false" />
             <element signature="n#!!block;n#onTagCheckChanged#0" expanded="false" />
-            <element signature="e#4337#4560#0" expanded="false" />
+            <element signature="e#4352#4575#0" expanded="false" />
             <element signature="n#!!block;n#loadTags#0" expanded="false" />
-            <element signature="e#4750#5217#0" expanded="false" />
-            <element signature="e#4804#4929#0" expanded="false" />
-            <element signature="e#4956#5084#0" expanded="false" />
-            <element signature="e#5092#5213#0" expanded="false" />
+            <element signature="e#4765#5232#0" expanded="false" />
+            <element signature="e#4819#4944#0" expanded="false" />
+            <element signature="e#4971#5099#0" expanded="false" />
+            <element signature="e#5107#5228#0" expanded="false" />
             <element signature="n#!!block;n#onPlayPause#0" expanded="false" />
-            <element signature="e#5425#5537#0" expanded="false" />
-            <element signature="e#5544#5655#0" expanded="false" />
             <element signature="n#!!block;n#onSetStart#0" expanded="false" />
             <element signature="n#!!block;n#onSetEnd#0" expanded="false" />
+            <element signature="n#!!block;n#skipSource#0" expanded="false" />
+            <element signature="n#!!block;n#deleteSource#0" expanded="false" />
             <element signature="n#!!block;n#setPlayerPos#0" expanded="false" />
           </folding>
         </state>
@@ -1661,22 +1622,6 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/js/viewModels/XVideoViewModel.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/js/viewModels/xClipVM.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/js/viewModels/workspaceVM.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
@@ -1904,6 +1849,30 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/js/viewModels/workspaceVM.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/js/viewModels/xClipVM.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/js/viewModels/videoPlayerVM.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="17">
+          <caret line="1" column="2" selection-start-line="1" selection-start-column="2" selection-end-line="1" selection-end-column="2" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/cutInfo.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="502">
@@ -1921,30 +1890,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/js/models/batchItem.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="85">
-          <caret line="5" column="0" selection-start-line="5" selection-start-column="0" selection-end-line="5" selection-end-column="28" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/js/models/batch.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="136">
-          <caret line="8" column="2" selection-start-line="8" selection-start-column="2" selection-end-line="8" selection-end-column="2" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/js/models/mediaSource.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="255">
-          <caret line="15" column="0" selection-start-line="15" selection-start-column="0" selection-end-line="15" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/js/models/tagCreationModel.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
@@ -1953,31 +1898,49 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/js/models/batchItem.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="68">
+          <caret line="4" column="25" selection-start-line="4" selection-start-column="25" selection-end-line="4" selection-end-column="25" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/js/models/batch.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="25" selection-start-line="0" selection-start-column="25" selection-end-line="0" selection-end-column="25" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/js/models/mediaSource.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="51">
+          <caret line="3" column="14" selection-start-line="3" selection-start-column="9" selection-end-line="3" selection-end-column="14" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/js/cutInfo.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="306">
-          <caret line="70" column="17" selection-start-line="70" selection-start-column="17" selection-end-line="70" selection-end-column="17" />
+        <state relative-caret-position="192">
+          <caret line="112" column="28" selection-start-line="112" selection-start-column="28" selection-end-line="112" selection-end-column="28" />
           <folding>
-            <element signature="e#589#745#0" expanded="false" />
-            <element signature="n#!!block;n#getNewVideo#0" expanded="false" />
-            <element signature="e#3185#4263#0" expanded="false" />
-            <element signature="e#3756#4186#0" expanded="false" />
-            <element signature="e#3788#3846#0" expanded="false" />
-            <element signature="e#3877#4141#0" expanded="false" />
-            <element signature="e#3932#4136#0" expanded="false" />
-            <element signature="e#3939#4028#0" expanded="false" />
+            <element signature="e#873#1709#0" expanded="false" />
+            <element signature="n#!!block;n#initVideoPlayer#0" expanded="false" />
             <element signature="n#!!block;n#onTagCheckChanged#0" expanded="false" />
-            <element signature="e#4337#4560#0" expanded="false" />
+            <element signature="e#4352#4575#0" expanded="false" />
             <element signature="n#!!block;n#loadTags#0" expanded="false" />
-            <element signature="e#4750#5217#0" expanded="false" />
-            <element signature="e#4804#4929#0" expanded="false" />
-            <element signature="e#4956#5084#0" expanded="false" />
-            <element signature="e#5092#5213#0" expanded="false" />
+            <element signature="e#4765#5232#0" expanded="false" />
+            <element signature="e#4819#4944#0" expanded="false" />
+            <element signature="e#4971#5099#0" expanded="false" />
+            <element signature="e#5107#5228#0" expanded="false" />
             <element signature="n#!!block;n#onPlayPause#0" expanded="false" />
-            <element signature="e#5425#5537#0" expanded="false" />
-            <element signature="e#5544#5655#0" expanded="false" />
             <element signature="n#!!block;n#onSetStart#0" expanded="false" />
             <element signature="n#!!block;n#onSetEnd#0" expanded="false" />
+            <element signature="n#!!block;n#skipSource#0" expanded="false" />
+            <element signature="n#!!block;n#deleteSource#0" expanded="false" />
             <element signature="n#!!block;n#setPlayerPos#0" expanded="false" />
           </folding>
         </state>

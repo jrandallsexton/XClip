@@ -8,7 +8,13 @@ using XClip.DataObjects;
 
 namespace XClip.Repositories
 {
-    public class XVideoRepository : RepositoryBase
+    public interface IXVideoRepository
+    {
+        void Save(int userId, XVideo xVideo);
+        XVideo Get(Guid uId);
+    }
+
+    public class XVideoRepository : RepositoryBase, IXVideoRepository
     {
         public void Save(int userId, XVideo xVideo)
         {

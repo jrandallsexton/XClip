@@ -1,11 +1,14 @@
-﻿using System;
+﻿
+using System;
 using System.Collections.Generic;
 using System.Data.SqlClient;
 using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+
 using TMCP.Core.Data;
+
 using XClip.DataObjects;
 
 namespace XClip.Repositories
@@ -13,41 +16,23 @@ namespace XClip.Repositories
     public class BatchRepository : RepositoryBase
     {
 
-        private SqlBaseDal _dal = new SqlBaseDal();
+        private readonly SqlBaseDal _dal = new SqlBaseDal();
 
         public bool FileExists(string fName)
         {
 
-            const string sql = "SELECT COUNT(*) FROM [BatchSources] WHERE [Filename] = @Fname";
-
             var paramList = new List<SqlParameter> { new SqlParameter("@Fname", fName) };
 
-            return _dal.ExecuteScalarInLine(sql, paramList) > 0;
+            return _dal.ExecuteScalarInLine(Queries.FileExists, paramList) > 0;
 
         }
 
         public XSource RandomSource(int collectionId)
         {
-            var sb = new StringBuilder();
-            sb.AppendLine("declare @SourceId int");
-            sb.AppendLine("select top 1 @SourceId = BI.[Id]");
-            sb.AppendLine("FROM [BatchSources] BI");
-            sb.AppendLine("WHERE (BI.Reviewed IS NULL) AND");
-            sb.AppendLine("(BI.Deleted IS NULL) AND");
-            sb.AppendLine("(BI.Skipped IS NULL) AND");
-            sb.AppendLine("(BI.FileExt = '.mp4') AND");
-            sb.AppendLine("(BI.CollectionId = @CollectionId)");
-            sb.AppendLine("ORDER BY NEWID()");
-            sb.AppendLine("SELECT BS.Id, BS.UId, BS.[Filename], BS.[FileExt], BS.[Filesize], BS.[Created]");
-            sb.AppendLine("from [BatchSources] BS");
-            sb.AppendLine("where BS.Id = @SourceId");
 
-            var paramList = new List<SqlParameter>
-            {
-                new SqlParameter("CollectionId", collectionId)
-            };
+            var paramList = new List<SqlParameter> { new SqlParameter("CollectionId", collectionId) };
 
-            using (var rdr = _dal.OpenDataReaderInLine(sb.ToString(), paramList))
+            using (var rdr = _dal.OpenDataReaderInLine(Queries.RandomSource, paramList))
             {
                 if ((rdr == null) || (!rdr.HasRows)) { return null; }
 
@@ -87,7 +72,10 @@ namespace XClip.Repositories
         public bool BatchItemsSave(int batchId, List<XBatchItem> items)
         {
 
-            const string sql = "INSERT INTO [BatchItems] ([UId], [BatchId], [Index], [StartTime], [StopTime], [Duration]) VALUES (@UId, @BatchId, @Index, @Start, @Stop, @Dur) SELECT SCOPE_IDENTITY()";
+            var sql = new StringBuilder();
+            sql.AppendLine("INSERT INTO [BatchItems] ([UId], [BatchId], [Index], [StartTime], [StopTime], [Duration])");
+            sql.AppendLine("VALUES (@UId, @BatchId, @Index, @Start, @Stop, @Dur)");
+            sql.AppendLine("SELECT SCOPE_IDENTITY()");
 
             var i = 0;
 
@@ -104,7 +92,7 @@ namespace XClip.Repositories
                     new SqlParameter("@Dur", batchItem.Duration)
                 };
 
-                var batchItemId = base.ExecuteIdentity(sql, paramList);
+                var batchItemId = base.ExecuteIdentity(sql.ToString(), paramList);
                 this.SaveBatchItemTags(batchItemId, batchItem.Tags);
 
                 i++;
@@ -127,13 +115,7 @@ namespace XClip.Repositories
             };
 
             batch.Id = base.ExecuteIdentity(sql, paramList);
-            if (this.BatchItemsSave(batch.Id, batch.Items))
-            {
-                return this.MarkSourceAsReviewed(batch.SrcId);
-            }
-
-            return false;
-
+            return this.BatchItemsSave(batch.Id, batch.Items) && this.MarkSourceAsReviewed(batch.SrcId);
         }
 
         public void MarkStarted(Guid batchUId)

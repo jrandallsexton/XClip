@@ -110,19 +110,19 @@ function initVideoPlayer(mediaSource, callback) {
 function getNewVideo() {
 
 	apiWrapper.getRandomMedia(_collectionId, function(data) {
-		_batchSrc = data;
+		_mediaSource = data;
 
-		_batch = new batch(_batchSrc);
-		_tagIds = new Array();
+		_batch = new batch(null);
+		_batch.sourceId = _mediaSource.uId;
 
 		var html = [];
-		html.push('<source src="mediaSources/2/' + _batchSrc.uId + _batchSrc.fExt + '" type="' + _batchSrc.mimeType + '">');
+		html.push('<source src="mediaSources/2/' + _mediaSource.uId + _mediaSource.fExt + '" type="' + _mediaSource.mimeType + '">');
 		$( videoPlayer ).html( html.join('') );
 
 		// http://stackoverflow.com/questions/14799172/how-to-change-source-in-html5-video-with-jquery
 		$( videoPlayer ).load();
 
-		$( '#fname').html( _batchSrc.fName );
+		$( '#fname').html( _mediaSource.fName );
 
 		$( '#in' ).val( null );
 		$( '#out' ).val( null );
@@ -132,11 +132,10 @@ function getNewVideo() {
 		apiWrapper.getVideoTags(_mediaSource.uId, function(data) {
 
 			$("#vidTag").select2(
-				{
-					tags: _tags,
-					dropdownCssClass: "bigdrop"
-				}
-			).on("change", function(e) {
+			{
+				tags: _tags,
+				dropdownCssClass: "bigdrop"
+			}).on("change", function(e) {
 				if ((e.added != null) && (e.added != undefined)) {
 					// was it a new value?  if e.added.id is not an integer, it is text: that means a new tag
 					//if (isNaN(e.added.id)) { alert('new tag'); }
@@ -255,9 +254,12 @@ function addBatchItem() {
 }
 
 function saveBatch() {
+	_batch.tags = _tagsVidIds;
 	apiWrapper.batchSave(_batch, function(result) {
 		if (result) {
 			bootbox.alert("Batch saved successfully.<br/>The next video will now load.", function() {
+				_tagsVidIds = new Array();
+				_tagsClipIds = new Array();
 				getNewVideo();
 			});
 		}
