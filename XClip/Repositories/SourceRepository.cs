@@ -12,7 +12,16 @@ using XClip.DataObjects;
 
 namespace XClip.Repositories
 {
-    public class SourceRepository : RepositoryBase
+    public interface ISourceRepository
+    {
+        int Save(int collectionId, XSource source);
+        Guid UId(int collectionId, int sourceId);
+        void MarkAsSkipped(Guid sourceId);
+        void MarkAsDeleted(Guid sourceId);
+        XSource Get(Guid uId);
+    }
+
+    public class SourceRepository : RepositoryBase, ISourceRepository
     {
         private readonly IDbConnection _db = new SqlConnection(ConfigurationManager.ConnectionStrings["xclipDb"].ConnectionString);
 

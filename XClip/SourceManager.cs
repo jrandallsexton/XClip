@@ -5,10 +5,19 @@ using XClip.Repositories;
 
 namespace XClip
 {
-    public class SourceManager
+    public interface ISourceManager
+    {
+        int Save(int collectionId, XSource source);
+        Guid UId(int collectionId, int sourceId);
+        void MarkAsSkipped(Guid uId);
+        void MarkAsDeleted(Guid uId);
+        XSource Get(Guid uId);
+    }
+
+    public class SourceManager : ISourceManager
     {
 
-        private readonly SourceRepository _sourceRepository = new SourceRepository();
+        private readonly ISourceRepository _sourceRepository = new SourceRepository();
 
         public int Save(int collectionId, XSource source)
         {

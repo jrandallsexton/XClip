@@ -7,10 +7,19 @@ using XClip.Repositories;
 
 namespace XClip
 {
-    public class TagManager
+    public interface ITagManager
+    {
+        Dictionary<int, string> GetTags(int userId, int? collectionId);
+        IEnumerable<string> GetBlacklist();
+        int Save(int userId, int? collectionId, string tagText);
+        void AddTag(int sourceId, int tagId);
+        Dictionary<int, string> GetTags(Guid mediaId);
+    }
+
+    public class TagManager : ITagManager
     {
 
-        private TagRepository _tagRepository = new TagRepository();
+        private readonly ITagRepository _tagRepository = new TagRepository();
 
         public Dictionary<int, string> GetTags(int userId, int? collectionId)
         {

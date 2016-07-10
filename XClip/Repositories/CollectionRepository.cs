@@ -8,7 +8,13 @@ using TMCP.Core.Data;
 
 namespace XClip.Repositories
 {
-    public class CollectionRepository : RepositoryBase
+    public interface ICollectionRepository
+    {
+        int Create(int userId, string name);
+        void Delete(int id, int userId);
+    }
+
+    public class CollectionRepository : RepositoryBase, ICollectionRepository
     {
         public int Create(int userId, string name)
         {

@@ -2,13 +2,23 @@
 using System;
 using System.Collections.Generic;
 using System.Data.SqlClient;
-using System.Net.Http.Headers;
 using System.Text;
+
 using TMCP.Core.Data;
 
 namespace XClip.Repositories
 {
-    public class TagRepository : RepositoryBase
+    public interface ITagRepository
+    {
+        Dictionary<int, string> Tags(int userId, int? collectionId);
+        Dictionary<int, string> GetTags(Guid mediaId);
+        IEnumerable<string> GetBlacklist();
+        int Save(int userId, int? collectionId, string tagText);
+        void AddTag(int sourceId, int tagId);
+        bool TagExists(int sourceId, int tagId);
+    }
+
+    public class TagRepository : RepositoryBase, ITagRepository
     {
         public Dictionary<int, string> Tags(int userId, int? collectionId)
         {

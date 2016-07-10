@@ -12,9 +12,9 @@ namespace XClip
 {
     public class CollectionManager
     {
-        private readonly CollectionRepository _collectionRepository = new CollectionRepository();
-        private readonly SourceManager _sourceManager = new SourceManager();
-        private readonly TagManager _tagManager = new TagManager();
+        private readonly ICollectionRepository _collectionRepository = new CollectionRepository();
+        private readonly ISourceManager _sourceManager = new SourceManager();
+        private readonly ITagManager _tagManager = new TagManager();
 
         public int Create(int userId, string name)
         {
