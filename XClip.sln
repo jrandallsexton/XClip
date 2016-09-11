@@ -13,6 +13,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "XClip.Api", "XClip.Api\XCli
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "XClip.Processor", "XClip.Processor\XClip.Processor.csproj", "{D46CD13A-D88A-49AE-A235-FEBAE4012041}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{F76A80CF-AD1E-4BA1-AFED-4B6CACEB5CCA}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -42,5 +44,10 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{7924E56C-35D1-4AA1-AA9C-25AE93A86345} = {F76A80CF-AD1E-4BA1-AFED-4B6CACEB5CCA}
+		{FAD9221C-B27B-411D-91DB-D0B10CD67336} = {F76A80CF-AD1E-4BA1-AFED-4B6CACEB5CCA}
+		{D46CD13A-D88A-49AE-A235-FEBAE4012041} = {F76A80CF-AD1E-4BA1-AFED-4B6CACEB5CCA}
 	EndGlobalSection
 EndGlobal

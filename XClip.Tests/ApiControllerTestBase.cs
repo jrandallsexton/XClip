@@ -28,13 +28,13 @@ namespace XClip.Tests
         private readonly List<TestResult> _results = new List<TestResult>();
         private readonly bool _logResults = false;
 
-        [TestFixtureSetUp]
+        [OneTimeSetUp]
         public void SetUp()
         {
             //_results = new List<TestResult>();
         }
 
-        [TestFixtureTearDown]
+        [OneTimeTearDown]
         public void TearDown()
         {
             //// sort all results by BytesPerSecond to find slow calls

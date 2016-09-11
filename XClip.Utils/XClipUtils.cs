@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Text.RegularExpressions;
+
 using XClip.Config;
 using XClip.DataObjects;
 
@@ -54,34 +55,41 @@ namespace XClip.Utils
                 if (!config.AllowedExtensions.Contains(fi.Extension))
                     continue;
 
-                if (fi.Name.Contains("(") && fi.Name.Contains(")"))
+                if (!fi.Name.Contains("(") || !fi.Name.Contains(")")) continue;
+
+                //Console.WriteLine(fi.Name);
+
+                // get the filename without the parens
+                var left = fi.Name.IndexOf("(", StringComparison.Ordinal);
+                var right = fi.Name.IndexOf(")", StringComparison.Ordinal);
+
+                var scrubbed = fi.Name.Substring(0, left);
+                scrubbed += fi.Name.Substring(right + 1, fi.Name.Length - right - 1);
+
+                var orig = $"{config.DirectoryIn}\\{scrubbed}";
+                var exists = File.Exists(orig);
+
+                if (!exists) continue;
+
+                var origFi = new FileInfo(orig);
+                if (origFi.Length != fi.Length) continue;
+
+                count++;
+
+                Console.WriteLine($@"{count}. {fi.Name} => {scrubbed} ({origFi.Length})");
+
+                var src = Path.Combine(config.DirectoryIn, fi.Name);
+
+                if (File.Exists($"H:\\Downloads\\Dups\\{fi.Name}"))
                 {
-                    //Console.WriteLine(fi.Name);
-
-                    // get the filename without the parens
-                    var left = fi.Name.IndexOf("(");
-                    var right = fi.Name.IndexOf(")");
-
-                    var scrubbed = fi.Name.Substring(0, left);
-                    scrubbed += fi.Name.Substring(right + 1, fi.Name.Length - right - 1);
-
-                    var orig = string.Format("{0}\\{1}", config.DirectoryIn, scrubbed);
-                    var exists = File.Exists(orig);
-
-                    if (exists)
-                    {
-                        var origFi = new FileInfo(orig);
-                        if (origFi.Length == fi.Length)
-                        {
-                            count++;
-                            Console.WriteLine("{0}. {1} => {2} ({3})", count, fi.Name, scrubbed, origFi.Length);
-                            var src = Path.Combine(config.DirectoryIn, fi.Name);
-                            var tgt = string.Format("H:\\Downloads\\Dups\\{0}", fi.Name);
-                            File.Move(src, tgt);
-                        }
-                        
-                    }    
-                    
+                    var unique = Guid.NewGuid().ToString().Substring(0, 5);
+                    var tgt = $"H:\\Downloads\\Dups\\{unique}_{fi.Name}";
+                    File.Move(src, tgt);
+                }
+                else
+                {
+                    var tgt = $"H:\\Downloads\\Dups\\{fi.Name}";
+                    File.Move(src, tgt);
                 }
             }
         }

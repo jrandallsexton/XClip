@@ -1,12 +1,10 @@
-﻿using System;
+﻿
+using System;
 using System.Collections.Generic;
 using System.Configuration;
 using System.Data;
 using System.Data.Common;
 using System.Data.SqlClient;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace XClip.Repositories
 {
@@ -47,7 +45,7 @@ namespace XClip.Repositories
             return param;
         }
 
-        public T ExecuteScalar<T>(string sqlStatement, IList<SqlParameter> paramList)
+        protected T ExecuteScalar<T>(string sqlStatement, IList<SqlParameter> paramList)
         {
             using (var connection = new SqlConnection(this._connectionString))
             {
@@ -158,8 +156,6 @@ namespace XClip.Repositories
 
             SqlConnection cnnSql = null;
             SqlCommand cmdSql = null;
-
-            var logId = -1;
 
             try
             {
